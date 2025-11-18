@@ -22,27 +22,31 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		558B2C612ECCA92E000DB86D /* Exceptions for "ReRoomy" folder in "ReRoomy" target */ = {
+		558B2C612ECCA92E000DB86D /* Exceptions for "ReRoomyApplication" folder in "ReRoomy" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				ReRoomy/Info.plist,
+				ReRoomyTests/ReRoomyTests.swift,
 			);
 			target = 558B2C382ECCA92C000DB86D /* ReRoomy */;
+		};
+		558B2C872ECCAA3F000DB86D /* Exceptions for "ReRoomyApplication" folder in "ReRoomyTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ReRoomyTests/ReRoomyTests.swift,
+			);
+			target = 558B2C4E2ECCA92E000DB86D /* ReRoomyTests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		558B2C3B2ECCA92C000DB86D /* ReRoomy */ = {
+		558B2C3B2ECCA92C000DB86D /* ReRoomyApplication */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				558B2C612ECCA92E000DB86D /* Exceptions for "ReRoomy" folder in "ReRoomy" target */,
+				558B2C612ECCA92E000DB86D /* Exceptions for "ReRoomyApplication" folder in "ReRoomy" target */,
+				558B2C872ECCAA3F000DB86D /* Exceptions for "ReRoomyApplication" folder in "ReRoomyTests" target */,
 			);
-			path = ReRoomy;
-			sourceTree = "<group>";
-		};
-		558B2C522ECCA92E000DB86D /* ReRoomyTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ReRoomyTests;
+			path = ReRoomyApplication;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -68,8 +72,7 @@
 		558B2C302ECCA92C000DB86D = {
 			isa = PBXGroup;
 			children = (
-				558B2C3B2ECCA92C000DB86D /* ReRoomy */,
-				558B2C522ECCA92E000DB86D /* ReRoomyTests */,
+				558B2C3B2ECCA92C000DB86D /* ReRoomyApplication */,
 				558B2C3A2ECCA92C000DB86D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,7 +102,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				558B2C3B2ECCA92C000DB86D /* ReRoomy */,
+				558B2C3B2ECCA92C000DB86D /* ReRoomyApplication */,
 			);
 			name = ReRoomy;
 			packageProductDependencies = (
@@ -120,9 +123,6 @@
 			);
 			dependencies = (
 				558B2C512ECCA92E000DB86D /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				558B2C522ECCA92E000DB86D /* ReRoomyTests */,
 			);
 			name = ReRoomyTests;
 			packageProductDependencies = (
@@ -222,7 +222,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ReRoomy/Info.plist;
+				INFOPLIST_FILE = ReRoomyApplication/ReRoomy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -255,7 +255,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ReRoomy/Info.plist;
+				INFOPLIST_FILE = ReRoomyApplication/ReRoomy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
