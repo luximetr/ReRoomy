@@ -1,12 +1,20 @@
 {
-  "originHash" : "5c7c11bab6c0170538f363749d636db7e4ee1c70b10c44110f66de2be69a9b87",
+  "originHash" : "30b9bdfdc9e4654f106beb566739296322b4b6a2c3c939c3f504bfaf04a8754a",
   "pins" : [
+    {
+      "identity" : "afoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ihormyroniuk/AFoundation.git",
+      "state" : {
+        "branch" : "development",
+        "revision" : "1f8c7f56aa54a0e332cb44d80855c28d299444ba"
+      }
+    },
     {
       "identity" : "auikit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ihormyroniuk/AUIKit.git",
       "state" : {
-        "branch" : "development",
         "revision" : "6257125b368b669ff480c13649acff545101aac4"
       }
     }
