@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		558B2C8F2ECCACE7000DB86D /* ReRoomyPresentation in Frameworks */ = {isa = PBXBuildFile; productRef = 558B2C8E2ECCACE7000DB86D /* ReRoomyPresentation */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		558B2C502ECCA92E000DB86D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -19,6 +23,7 @@
 /* Begin PBXFileReference section */
 		558B2C392ECCA92C000DB86D /* ReRoomy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReRoomy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		558B2C4F2ECCA92E000DB86D /* ReRoomyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReRoomyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		558B2C8C2ECCAC0F000DB86D /* ReRoomyPresentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ReRoomyPresentation; path = ../ReRoomyPresentation; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -56,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558B2C8F2ECCACE7000DB86D /* ReRoomyPresentation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				558B2C3B2ECCA92C000DB86D /* ReRoomyApplication */,
+				558B2C8C2ECCAC0F000DB86D /* ReRoomyPresentation */,
+				558B2C8D2ECCACE7000DB86D /* Frameworks */,
 				558B2C3A2ECCA92C000DB86D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +92,13 @@
 				558B2C4F2ECCA92E000DB86D /* ReRoomyTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		558B2C8D2ECCACE7000DB86D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,6 +121,7 @@
 			);
 			name = ReRoomy;
 			packageProductDependencies = (
+				558B2C8E2ECCACE7000DB86D /* ReRoomyPresentation */,
 			);
 			productName = ReRoomy;
 			productReference = 558B2C392ECCA92C000DB86D /* ReRoomy.app */;
@@ -225,9 +241,9 @@
 				INFOPLIST_FILE = ReRoomyApplication/ReRoomy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -258,9 +274,9 @@
 				INFOPLIST_FILE = ReRoomyApplication/ReRoomy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,6 +487,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		558B2C8E2ECCACE7000DB86D /* ReRoomyPresentation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ReRoomyPresentation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 558B2C312ECCA92C000DB86D /* Project object */;
 }
