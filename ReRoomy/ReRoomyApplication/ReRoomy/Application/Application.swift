@@ -26,7 +26,46 @@ class Application: NSObject, UIApplicationDelegate {
     var presentation: PresentationProtocol!
     
     func initializePresentation() throws {
-        let presentation: PresentationProtocol = Presentation()
+        let presentationAppearanceSetting: PresentationAppearanceSetting = .light
+        let presentation: PresentationProtocol = Presentation(locale: locale, time: time, appearanceSetting: presentationAppearanceSetting)
         self.presentation = presentation
+    }
+    
+    // MARK: - Calendar
+    
+    var calendar: Calendar!
+    
+    // MARK: - Time
+    
+    var time: Time!
+    
+    private func initializeTime() {
+        let currentCalendar = Calendar.current
+        calendar = currentCalendar
+//        calendar.locale = locale.foundationLocale
+        calendar.firstWeekday = currentCalendar.firstWeekday
+        let time = ClosuresTime(
+            currentDeviceTime: { Date() },
+            currentDeviceCalendar: { self.calendar },
+            currentDeviceTimeZone: { TimeZone.current }
+        )
+        self.time = time
+    }
+    
+    // MARK: - Locale
+    
+    var locale: Locale!
+    
+    private func initializeLocale() throws {
+//        do {
+//            let storageSelectedLanguage = try storage.getSelectedLanguage()
+//            let selectedLanguage = LanguageMapper.mapToLanguage(storageSelectedLanguage)
+//            let deviceLanguage = LanguageMapper.mapToLanguage(devicePreferredLanguages)
+//            let language = selectedLanguage ?? deviceLanguage ?? .english
+//            let locale = Locale(language: language)
+            self.locale = Locale.current
+//        } catch {
+//            throw Error("Cannot initialize locale\n\(error)")
+//        }
     }
 }

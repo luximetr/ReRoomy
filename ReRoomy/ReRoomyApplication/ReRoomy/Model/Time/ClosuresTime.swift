@@ -1,6 +1,9 @@
 import Foundation
+import ReRoomyPresentation
 
-internal class ClosuresTime: Time {
+typealias PresentationTime = ReRoomyPresentation.Time
+
+class ClosuresTime: PresentationTime {
     
     public init(currentDeviceTime: @escaping () -> Date, currentDeviceCalendar: @escaping () -> Calendar, currentDeviceTimeZone: @escaping () -> TimeZone) {
         self._currentDeviceTime = currentDeviceTime
