@@ -26,13 +26,11 @@ final class ScreenView: StatusBarScreenView {
     }
     
     private func setupTitleLabel() {
-        titleLabel.text = "Title"
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
     }
     
     private func setupSubtitleLabel() {
-        subtitleLabel.text = "Subtitle"
         subtitleLabel.numberOfLines = 0
         subtitleLabel.textAlignment = .center
     }

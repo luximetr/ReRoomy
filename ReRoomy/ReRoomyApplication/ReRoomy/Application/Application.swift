@@ -29,7 +29,8 @@ class Application: NSObject, UIApplicationDelegate {
     
     func initializePresentation() throws {
         let presentationAppearanceSetting: PresentationAppearanceSetting = .light
-        let presentation: PresentationProtocol = Presentation(locale: locale, time: time, appearanceSetting: presentationAppearanceSetting)
+        let presentationLocale = LocaleMapper.mapToPresentation(locale: locale)
+        let presentation: PresentationProtocol = Presentation(locale: presentationLocale, time: time, appearanceSetting: presentationAppearanceSetting)
         self.presentation = presentation
     }
     
@@ -58,6 +59,7 @@ class Application: NSObject, UIApplicationDelegate {
     var locale: Locale!
     
     private func initializeLocale() throws {
-        self.locale = Locale.current
+        let locale = Locale(language: .english)
+        self.locale = locale
     }
 }
