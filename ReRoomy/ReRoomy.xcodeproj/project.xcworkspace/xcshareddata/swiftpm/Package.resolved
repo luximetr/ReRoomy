@@ -1,0 +1,15 @@
+{
+  "originHash" : "5c7c11bab6c0170538f363749d636db7e4ee1c70b10c44110f66de2be69a9b87",
+  "pins" : [
+    {
+      "identity" : "auikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ihormyroniuk/AUIKit.git",
+      "state" : {
+        "branch" : "development",
+        "revision" : "6257125b368b669ff480c13649acff545101aac4"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -1,5 +1,4 @@
 // swift-tools-version: 6.2
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -14,9 +13,15 @@ let package = Package(
             targets: ["ReRoomyPresentation"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/ihormyroniuk/AUIKit.git", revision: "6257125b368b669ff480c13649acff545101aac4"),
+    ],
     targets: [
         .target(
             name: "ReRoomyPresentation",
+            dependencies: [
+                "AUIKit"
+            ],
             path: "ReRoomyPresentation"
         ),
         .testTarget(
