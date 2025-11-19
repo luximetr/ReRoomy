@@ -125,7 +125,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
         gradientLayer.colors = appearance.colors.secondaryBackgroundGradient
         titleLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
-        priceLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
+        priceLabel.font = appearance.fonts.primary(size: 20, weight: .semibold)
         showIsSelected(isSelected)
     }
     
