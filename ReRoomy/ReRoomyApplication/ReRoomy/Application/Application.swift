@@ -8,7 +8,7 @@ class Application: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         do {
             try initialize()
-            presentation.show()
+            presentation.showOnboarding()
         } catch {
             print(error)
         }
@@ -30,7 +30,9 @@ class Application: NSObject, UIApplicationDelegate {
     func initializePresentation() throws {
         let presentationAppearanceSetting: PresentationAppearanceSetting = .dark
         let presentationLocale = LocaleMapper.mapToPresentation(locale: locale)
-        let presentation: PresentationProtocol = Presentation(locale: presentationLocale, time: time, appearanceSetting: presentationAppearanceSetting)
+        var presentation: PresentationProtocol = Presentation(locale: presentationLocale, time: time, appearanceSetting: presentationAppearanceSetting)
+        weak var weakSelf = self
+        presentation.getUnlimitedPlans = weakSelf?.presentationUnlimitedPlans
         self.presentation = presentation
     }
     
@@ -61,5 +63,17 @@ class Application: NSObject, UIApplicationDelegate {
     private func initializeLocale() throws {
         let locale = Locale(language: .english)
         self.locale = locale
+    }
+    
+    // MARK: - Store
+    
+    private var _storeKitProvider: StoreKitProvider?
+    var storeKitProvider: StoreKitProvider {
+        if let storeKitProvider = _storeKitProvider {
+            return storeKitProvider
+        }
+        let storeKitProvider = StoreKitProvider()
+        _storeKitProvider = storeKitProvider
+        return storeKitProvider
     }
 }

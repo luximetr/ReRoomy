@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		558B2C8F2ECCACE7000DB86D /* ReRoomyPresentation in Frameworks */ = {isa = PBXBuildFile; productRef = 558B2C8E2ECCACE7000DB86D /* ReRoomyPresentation */; };
+		558B2D082ECCD03A000DB86D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558B2D072ECCD03A000DB86D /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +25,7 @@
 		558B2C392ECCA92C000DB86D /* ReRoomy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReRoomy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		558B2C4F2ECCA92E000DB86D /* ReRoomyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReRoomyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		558B2C8C2ECCAC0F000DB86D /* ReRoomyPresentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ReRoomyPresentation; path = ../ReRoomyPresentation; sourceTree = SOURCE_ROOT; };
+		558B2D072ECCD03A000DB86D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -62,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				558B2C8F2ECCACE7000DB86D /* ReRoomyPresentation in Frameworks */,
+				558B2D082ECCD03A000DB86D /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +100,7 @@
 		558B2C8D2ECCACE7000DB86D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				558B2D072ECCD03A000DB86D /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -19,15 +19,6 @@ public final class Presentation: @MainActor PresentationProtocol {
     
     let window: UIWindow
     
-    // MARK: - Display
-    
-    public func show() {
-        let viewController = OnboardingPaywallScreenViewController(appearance: appearance, locale: locale, time: time)
-//        viewController.view.backgroundColor = .blue
-        window.rootViewController = viewController
-        window.makeKeyAndVisible()
-    }
-    
     // MARK: - Appearance
     
     var appearance: Appearance
@@ -73,4 +64,8 @@ public final class Presentation: @MainActor PresentationProtocol {
     func setLocale(_ locale: Locale) {
         self.locale = locale
     }
+    
+    // MARK: - Unlimited plans
+    
+    public var getUnlimitedPlans: (() async throws -> UnlimitedPlans)!
 }

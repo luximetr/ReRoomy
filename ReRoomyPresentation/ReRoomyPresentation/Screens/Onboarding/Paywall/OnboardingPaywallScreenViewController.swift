@@ -25,6 +25,7 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonTouchUpInside), for: .touchUpInside)
         screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonValueChanged), for: .valueChanged)
         setLocalizedContent()
+        loadUnlimitedPlans()
     }
     
     // MARK: - Appearance
@@ -49,7 +50,31 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.titleLabel.text = localizer.localizeText("title")
         screenView.subtitleLabel.text = localizer.localizeText("subtitle")
         screenView.showPurchaseFooter(title: localizer.localizeText("purchaseFooterTitle"))
+        screenView.regularTermPlanButton.titleLabel.text = localizer.localizeText("weeklyPlanTrialDuration")
+        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("weeklyPlanPrice", "0")
+        screenView.regularTermPlanButton.priceLabel.text = localizer.localizeText("weeklyPlanTrialPrice")
+        screenView.longTermPlanButton.titleLabel.text = localizer.localizeText("yearlyPlanTitle")
+        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("yearlyPlanPriceTitle")
+        screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("yearlyPlanDiscount", "85%")
+        screenView.trialToggleButton.titleLabel.text = localizer.localizeText("trialFooterTitle")
         screenView.continueButton.title = "Test"
+    }
+    
+    // MARK: - Plans
+    
+    var getUnlimitedPlans: ((@escaping (UnlimitedPlans) -> Void) -> Void)?
+    
+    private func loadUnlimitedPlans() {
+        guard let getUnlimitedPlans = getUnlimitedPlans else { return }
+        getUnlimitedPlans({ [weak self] plans in
+            guard let self = self else { return }
+            self.showUnlimitedPlans(plans)
+        })
+    }
+    
+    private func showUnlimitedPlans(_ plans: UnlimitedPlans) {
+        screenView.longTermPlanButton.subtitleLabel.text = plans.yearly.priceFormatted
+        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("weeklyPlanPrice", plans.weekly.priceFormatted)
     }
 
     // MARK: - Long term plan

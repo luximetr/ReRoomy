@@ -33,11 +33,4 @@ class TextFilledButton: LazyAppearanceButton {
             titleLabel?.alpha = 1
         }
     }
-    
-    // MARK: - Text
-    
-    var title: String? {
-        get { titleLabel?.text }
-        set { setTitle(newValue, for: .normal) }
-    }
 }

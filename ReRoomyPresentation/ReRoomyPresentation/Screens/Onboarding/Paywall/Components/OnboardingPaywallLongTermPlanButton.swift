@@ -33,12 +33,6 @@ class LongTermPlanButton: LazyAppearanceButton {
         setupPricePerDayValueLabel()
         addSubview(pricePerDayTitleLabel)
         setupPricePerDayTitleLabel()
-        
-        discountLabel.text = "Discount"
-        titleLabel.text = "Title"
-        subtitleLabel.text = "Subtitle"
-        pricePerDayValueLabel.text = "value"
-        pricePerDayTitleLabel.text = "title"
     }
     
     private func setupDiscountBackgroundView() {
@@ -86,12 +80,14 @@ class LongTermPlanButton: LazyAppearanceButton {
     
     private static let discountLabelLeadingTrailing: CGFloat = 16
     private static let discountLabelTopBottom: CGFloat = 6
+    private static let discountLabelMinHeight: CGFloat = 15
     
     private func layoutDiscountLabel() {
         let x = Self.discountLabelLeadingTrailing
         let width = bounds.width - x - Self.discountLabelLeadingTrailing
         let y = Self.discountLabelTopBottom
-        let height = discountLabel.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
+        let heightThatFits = discountLabel.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
+        let height = max(Self.discountLabelMinHeight, heightThatFits)
         let frame = CGRect(x: x, y: y, width: width, height: height)
         discountLabel.frame = frame
     }

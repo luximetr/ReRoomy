@@ -20,7 +20,6 @@ final class TrialToggleButton: LazyAppearanceButton {
         setupTitleLabel()
         addSubview(toggle)
         setupToggle()
-        titleLabel.text = "Title"
     }
 
     private func setupTitleLabel() {

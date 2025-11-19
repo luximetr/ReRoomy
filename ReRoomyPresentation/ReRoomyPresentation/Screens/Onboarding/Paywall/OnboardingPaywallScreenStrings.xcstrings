@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "continueButtonPurchaseTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "continueButtonTrialTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try for Free"
+          }
+        }
+      }
+    },
     "purchaseFooterTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41,6 +63,83 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No payment now"
+          }
+        }
+      }
+    },
+    "trialToggleTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Free Trial Enabled"
+          }
+        }
+      }
+    },
+    "weeklyPlanPrice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "then %@ per week"
+          }
+        }
+      }
+    },
+    "weeklyPlanTrialDuration" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Days Trial"
+          }
+        }
+      }
+    },
+    "weeklyPlanTrialPrice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FREE"
+          }
+        }
+      }
+    },
+    "yearlyPlanDiscount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save %@"
+          }
+        }
+      }
+    },
+    "yearlyPlanPriceTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Per Day"
+          }
+        }
+      }
+    },
+    "yearlyPlanTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yearly Plan"
           }
         }
       }

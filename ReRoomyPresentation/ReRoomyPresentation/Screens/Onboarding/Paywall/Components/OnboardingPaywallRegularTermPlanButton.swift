@@ -10,7 +10,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
     override var titleLabel: UILabel { _titleLabel }
     private let _subtitleLabel = UILabel()
     override var subtitleLabel: UILabel { _subtitleLabel }
-    let pricePerDayValueLabel = UILabel()
+    let priceLabel = UILabel()
     
     // MARK: - Setup
     
@@ -22,12 +22,8 @@ class RegularTermPlanButton: LazyAppearanceButton {
         setupTitleLabel()
         addSubview(subtitleLabel)
         setupSubtitleLabel()
-        addSubview(pricePerDayValueLabel)
-        setupPricePerDayValueLabel()
-        
-        titleLabel.text = "Title"
-        subtitleLabel.text = "Subtitle"
-        pricePerDayValueLabel.text = "value"
+        addSubview(priceLabel)
+        setupPriceLabel()
     }
     
     private func setupTitleLabel() {
@@ -38,8 +34,8 @@ class RegularTermPlanButton: LazyAppearanceButton {
         
     }
     
-    private func setupPricePerDayValueLabel() {
-        pricePerDayValueLabel.textAlignment = .right
+    private func setupPriceLabel() {
+        priceLabel.textAlignment = .right
     }
     
     // MARK: - Layout
@@ -49,7 +45,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
         layoutGradientLayer()
         layoutTitleLabel()
         layoutSubtitleLabel()
-        layoutPricePerDayValueLabel()
+        layoutPriceLabel()
     }
     
     private func layoutGradientLayer() {
@@ -87,17 +83,17 @@ class RegularTermPlanButton: LazyAppearanceButton {
         subtitleLabel.frame = frame
     }
     
-    private static let pricePerDayValueLabelTop: CGFloat = 12
-    private static let pricePerDayValueLabelTrailing: CGFloat = 16
-    private static let pricePerDayValueLabelHeight: CGFloat = 26
+    private static let priceLabelTop: CGFloat = 12
+    private static let priceLabelTrailing: CGFloat = 16
+    private static let priceLabelHeight: CGFloat = 26
     
-    private func layoutPricePerDayValueLabel() {
-        let height = Self.pricePerDayValueLabelHeight
+    private func layoutPriceLabel() {
+        let height = Self.priceLabelHeight
         let y = (bounds.height - height) / 2
-        let width = pricePerDayValueLabel.sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: height)).width
-        let x = bounds.width - width - Self.pricePerDayValueLabelTrailing
+        let width = priceLabel.sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: height)).width
+        let x = bounds.width - width - Self.priceLabelTrailing
         let frame = CGRect(x: x, y: y, width: width, height: height)
-        pricePerDayValueLabel.frame = frame
+        priceLabel.frame = frame
     }
     
     // MARK: - Size
@@ -129,7 +125,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
         gradientLayer.colors = appearance.colors.secondaryBackgroundGradient
         titleLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
-        pricePerDayValueLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
+        priceLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
         showIsSelected(isSelected)
     }
     
@@ -142,7 +138,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
     }
     
     private func showIsHighlighted(_ isHighlightedUpdated: Bool) {
-        let highligtingViews = [titleLabel, subtitleLabel, pricePerDayValueLabel]
+        let highligtingViews = [titleLabel, subtitleLabel, priceLabel]
         if isHighlightedUpdated {
             highligtingViews.forEach({ $0.alpha = 0.6 })
         } else {
@@ -173,7 +169,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
         layer.insertSublayer(gradientLayer, at: 0)
         titleLabel.textColor = appearance.colors.primaryText
         subtitleLabel.textColor = appearance.colors.primaryText
-        pricePerDayValueLabel.textColor = appearance.colors.primaryText
+        priceLabel.textColor = appearance.colors.primaryText
     }
     
     private func showDeselected(appearance: any Appearance) {
@@ -182,7 +178,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
         gradientLayer.removeFromSuperlayer()
         titleLabel.textColor = appearance.colors.secondaryText
         subtitleLabel.textColor = appearance.colors.secondaryText
-        pricePerDayValueLabel.textColor = appearance.colors.secondaryText
+        priceLabel.textColor = appearance.colors.secondaryText
     }
 }
 }
