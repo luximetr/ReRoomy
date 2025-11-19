@@ -11,6 +11,7 @@ final class ScreenView: StatusBarScreenView {
     
     // MARK: - Subviews
     
+    let backgroundPatternImageView = UIImageView()
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
     let bannerImageView = UIImageView()
@@ -24,6 +25,8 @@ final class ScreenView: StatusBarScreenView {
     
     override func setup() {
         super.setup()
+        addSubview(backgroundPatternImageView)
+        setupBackgroundPatternImageView()
         addSubview(titleLabel)
         setupTitleLabel()
         addSubview(subtitleLabel)
@@ -36,6 +39,10 @@ final class ScreenView: StatusBarScreenView {
         addSubview(continueButton)
         addSubview(footerView)
         setAppearance(appearance)
+    }
+    
+    private func setupBackgroundPatternImageView() {
+        backgroundPatternImageView.contentMode = .scaleAspectFill
     }
     
     private func setupTitleLabel() {
@@ -56,6 +63,7 @@ final class ScreenView: StatusBarScreenView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        layoutBackgroundPatternImageView()
         layoutTitleLabel()
         layoutSubtitleLabel()
         layoutBannerImageView()
@@ -67,6 +75,10 @@ final class ScreenView: StatusBarScreenView {
     }
     
     private static let contentLeadingTrailing: CGFloat = 16
+    
+    private func layoutBackgroundPatternImageView() {
+        backgroundPatternImageView.frame = bounds
+    }
     
     private static let titleLabelTop: CGFloat = 24
     
@@ -169,6 +181,7 @@ final class ScreenView: StatusBarScreenView {
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
         backgroundColor = appearance.colors.primaryBackground
+        backgroundPatternImageView.image = appearance.images.paywallBackgroundPatter
         titleLabel.textColor = appearance.colors.primaryText
         titleLabel.font = appearance.fonts.primary(size: 40, weight: .heavy)
         subtitleLabel.textColor = appearance.colors.primaryText

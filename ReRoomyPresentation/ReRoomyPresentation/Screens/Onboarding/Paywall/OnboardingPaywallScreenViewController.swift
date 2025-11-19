@@ -58,9 +58,9 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("yearlyPlanDiscount", "85%")
         screenView.longTermPlanButton.titleLabel.text = localizer.localizeText("yearlyPlanTitle")
         screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("yearlyPlanPriceTitle")
+        screenView.longTermPlanButton.pricePerDayValueLabel.text = "$0.1"
         screenView.longTermPlanButton.pricePerDayTitleLabel.text = localizer.localizeText("yearlyPlanPriceTitle")
         screenView.trialToggleButton.titleLabel.text = localizer.localizeText("trialFooterTitle")
-        screenView.continueButton.title = "Test"
     }
     
     // MARK: - Plans

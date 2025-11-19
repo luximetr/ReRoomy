@@ -1,0 +1,22 @@
+{
+  "originHash" : "a4bb69e1b1143b99c7d249c2b1ce19d12e769fc4e866bbb9ce1d2935b34e7e54",
+  "pins" : [
+    {
+      "identity" : "afoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ihormyroniuk/AFoundation.git",
+      "state" : {
+        "revision" : "1f8c7f56aa54a0e332cb44d80855c28d299444ba"
+      }
+    },
+    {
+      "identity" : "auikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ihormyroniuk/AUIKit.git",
+      "state" : {
+        "revision" : "6257125b368b669ff480c13649acff545101aac4"
+      }
+    }
+  ],
+  "version" : 3
+}
