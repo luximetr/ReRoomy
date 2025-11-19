@@ -14,6 +14,7 @@ final class ScreenView: StatusBarScreenView {
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
     let longTermPlanButton = LongTermPlanButton()
+    let regularTermPlanButton = RegularTermPlanButton()
     
     // MARK: - Setup
     
@@ -24,7 +25,7 @@ final class ScreenView: StatusBarScreenView {
         addSubview(subtitleLabel)
         setupSubtitleLabel()
         addSubview(longTermPlanButton)
-        setupLongTermPlanButton()
+        addSubview(regularTermPlanButton)
         setAppearance(appearance)
     }
     
@@ -38,11 +39,6 @@ final class ScreenView: StatusBarScreenView {
         subtitleLabel.textAlignment = .center
     }
     
-    private func setupLongTermPlanButton() {
-        longTermPlanButton.layer.cornerRadius = 20
-        longTermPlanButton.layer.masksToBounds = true
-    }
-    
     // MARK: - Layout
     
     override func layoutSubviews() {
@@ -50,6 +46,7 @@ final class ScreenView: StatusBarScreenView {
         layoutTitleLabel()
         layoutSubtitleLabel()
         layoutLongTermPlanButton()
+        layoutRegularTermPlanButton()
     }
     
     private static let contentLeadingTrailing: CGFloat = 16
@@ -89,6 +86,15 @@ final class ScreenView: StatusBarScreenView {
         longTermPlanButton.frame = frame
     }
     
+    private func layoutRegularTermPlanButton() {
+        let x = Self.contentLeadingTrailing
+        let width = bounds.width - Self.contentLeadingTrailing * 2
+        let height = regularTermPlanButton.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
+        let y = longTermPlanButton.frame.maxY + 16
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        regularTermPlanButton.frame = frame
+    }
+    
     // MARK: - Appearance
     
     override func setAppearance(_ appearance: any Appearance) {
@@ -97,6 +103,7 @@ final class ScreenView: StatusBarScreenView {
         titleLabel.font = appearance.fonts.primary(size: 40, weight: .heavy)
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         longTermPlanButton.setAppearance(appearance)
+        regularTermPlanButton.setAppearance(appearance)
     }
 }
 }

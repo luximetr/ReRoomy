@@ -1,7 +1,7 @@
 import UIKit
 
 extension OnboardingPaywallScreenViewController {
-class LongTermPlanButton: LazyAppearanceButton {
+class RegularTermPlanButton: LazyAppearanceButton {
     
     // MARK: - Subviews
     
@@ -10,10 +10,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     override var titleLabel: UILabel { _titleLabel }
     private let _subtitleLabel = UILabel()
     override var subtitleLabel: UILabel { _subtitleLabel }
-    let discountBackgroundView = UIView()
-    let discountLabel = UILabel()
     let pricePerDayValueLabel = UILabel()
-    let pricePerDayTitleLabel = UILabel()
     
     // MARK: - Setup
     
@@ -21,32 +18,16 @@ class LongTermPlanButton: LazyAppearanceButton {
         super.setup()
         layer.cornerRadius = 20
         layer.masksToBounds = true
-        addSubview(discountBackgroundView)
-        setupDiscountBackgroundView()
-        addSubview(discountLabel)
-        setupDiscountLabel()
         addSubview(titleLabel)
         setupTitleLabel()
         addSubview(subtitleLabel)
         setupSubtitleLabel()
         addSubview(pricePerDayValueLabel)
         setupPricePerDayValueLabel()
-        addSubview(pricePerDayTitleLabel)
-        setupPricePerDayTitleLabel()
         
-        discountLabel.text = "Discount"
         titleLabel.text = "Title"
         subtitleLabel.text = "Subtitle"
         pricePerDayValueLabel.text = "value"
-        pricePerDayTitleLabel.text = "title"
-    }
-    
-    private func setupDiscountBackgroundView() {
-        discountBackgroundView.isUserInteractionEnabled = false
-    }
-    
-    private func setupDiscountLabel() {
-        discountLabel.textAlignment = .center
     }
     
     private func setupTitleLabel() {
@@ -61,48 +42,20 @@ class LongTermPlanButton: LazyAppearanceButton {
         pricePerDayValueLabel.textAlignment = .right
     }
     
-    private func setupPricePerDayTitleLabel() {
-        pricePerDayTitleLabel.textAlignment = .right
-    }
-    
     // MARK: - Layout
     
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutGradientLayer()
-        layoutDiscountLabel()
-        layoutDiscountBackgroundView()
         layoutTitleLabel()
         layoutSubtitleLabel()
         layoutPricePerDayValueLabel()
-        layoutPricePerDayTitleLabel()
     }
     
     private func layoutGradientLayer() {
         gradientLayer.frame = bounds
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-    }
-    
-    private static let discountLabelLeadingTrailing: CGFloat = 16
-    private static let discountLabelTopBottom: CGFloat = 6
-    
-    private func layoutDiscountLabel() {
-        let x = Self.discountLabelLeadingTrailing
-        let width = bounds.width - x - Self.discountLabelLeadingTrailing
-        let y = Self.discountLabelTopBottom
-        let height = discountLabel.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
-        let frame = CGRect(x: x, y: y, width: width, height: height)
-        discountLabel.frame = frame
-    }
-    
-    private func layoutDiscountBackgroundView() {
-        let x: CGFloat = 0
-        let y: CGFloat = 0
-        let width = bounds.width
-        let height = discountLabel.frame.height + Self.discountLabelTopBottom * 2
-        let frame = CGRect(x: x, y: y, width: width, height: height)
-        discountBackgroundView.frame = frame
     }
     
     
@@ -112,7 +65,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     
     private func layoutTitleLabel() {
         let x = Self.titleLabelLeadingTrailing
-        let y = discountBackgroundView.frame.maxY + Self.titleLabelTop
+        let y = Self.titleLabelTop
         let width = bounds.width - x - Self.titleLabelLeadingTrailing
         let heightThatFits = titleLabel.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
         let height = max(heightThatFits, Self.titleLabelMinHeight)
@@ -139,24 +92,12 @@ class LongTermPlanButton: LazyAppearanceButton {
     private static let pricePerDayValueLabelHeight: CGFloat = 26
     
     private func layoutPricePerDayValueLabel() {
-        let y = discountBackgroundView.frame.maxY + Self.pricePerDayValueLabelTop
         let height = Self.pricePerDayValueLabelHeight
+        let y = (bounds.height - height) / 2
         let width = pricePerDayValueLabel.sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: height)).width
         let x = bounds.width - width - Self.pricePerDayValueLabelTrailing
         let frame = CGRect(x: x, y: y, width: width, height: height)
         pricePerDayValueLabel.frame = frame
-    }
-    
-    private static let pricePerDayTitleLabelTop: CGFloat = 4
-    private static let pricePerDayTitleLabelHeight: CGFloat = 20
-    
-    private func layoutPricePerDayTitleLabel() {
-        let y = pricePerDayValueLabel.frame.maxY + Self.pricePerDayTitleLabelTop
-        let height = Self.pricePerDayTitleLabelHeight
-        let width = pricePerDayTitleLabel.sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: height)).width
-        let x = bounds.width - width - Self.pricePerDayValueLabelTrailing
-        let frame = CGRect(x: x, y: y, width: width, height: height)
-        pricePerDayTitleLabel.frame = frame
     }
     
     // MARK: - Size
@@ -166,10 +107,6 @@ class LongTermPlanButton: LazyAppearanceButton {
         
         var height: CGFloat = 0
         
-        let discountLabelWidthToFit = width - Self.discountLabelLeadingTrailing * 2
-        let discountLabelHeight = discountLabel.sizeThatFits(CGSize(width: discountLabelWidthToFit, height: .greatestFiniteMagnitude)).height
-        height += discountLabelHeight + Self.discountLabelTopBottom * 2
-
         let titleLabelWidthToFit = width - Self.titleLabelLeadingTrailing * 2
         let titleLabelHeightThatFits = titleLabel.sizeThatFits(CGSize(width: titleLabelWidthToFit, height: .greatestFiniteMagnitude)).height
         let titleLabelHeight = max(titleLabelHeightThatFits, Self.titleLabelMinHeight)
@@ -190,12 +127,9 @@ class LongTermPlanButton: LazyAppearanceButton {
         super.setAppearance(appearance)
         backgroundColor = appearance.colors.secondaryBackground
         gradientLayer.colors = appearance.colors.secondaryBackgroundGradient
-        discountBackgroundView.backgroundColor = appearance.colors.primaryContrastBackground
-        discountLabel.textColor = appearance.colors.primaryContrastText
         titleLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         pricePerDayValueLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
-        pricePerDayTitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         showIsSelected(isSelected)
     }
     
@@ -208,7 +142,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     }
     
     private func showIsHighlighted(_ isHighlightedUpdated: Bool) {
-        let highligtingViews = [discountLabel, titleLabel, subtitleLabel, pricePerDayValueLabel, pricePerDayTitleLabel]
+        let highligtingViews = [titleLabel, subtitleLabel, pricePerDayValueLabel]
         if isHighlightedUpdated {
             highligtingViews.forEach({ $0.alpha = 0.6 })
         } else {
@@ -240,7 +174,6 @@ class LongTermPlanButton: LazyAppearanceButton {
         titleLabel.textColor = appearance.colors.primaryText
         subtitleLabel.textColor = appearance.colors.primaryText
         pricePerDayValueLabel.textColor = appearance.colors.primaryText
-        pricePerDayTitleLabel.textColor = appearance.colors.primaryText
     }
     
     private func showDeselected(appearance: any Appearance) {
@@ -250,7 +183,6 @@ class LongTermPlanButton: LazyAppearanceButton {
         titleLabel.textColor = appearance.colors.secondaryText
         subtitleLabel.textColor = appearance.colors.secondaryText
         pricePerDayValueLabel.textColor = appearance.colors.secondaryText
-        pricePerDayTitleLabel.textColor = appearance.colors.secondaryText
     }
 }
 }

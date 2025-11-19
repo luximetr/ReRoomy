@@ -21,6 +21,7 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         screenView.longTermPlanButton.addTarget(self, action: #selector(longTermPlanButtonTouchUpInside), for: .touchUpInside)
+        screenView.regularTermPlanButton.addTarget(self, action: #selector(regularTermPlanButtonTouchUpInside), for: .touchUpInside)
         setLocalizedContent()
     }
     
@@ -47,9 +48,15 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.subtitleLabel.text = localizer.localizeText("subtitle")
     }
 
-    // MARK: - Long term plan button
+    // MARK: - Long term plan
 
     @objc private func longTermPlanButtonTouchUpInside() {
         screenView.longTermPlanButton.isSelected.toggle()
+    }
+    
+    // MARK: - Regular term plan
+    
+    @objc private func regularTermPlanButtonTouchUpInside() {
+        screenView.regularTermPlanButton.isSelected.toggle()
     }
 }
