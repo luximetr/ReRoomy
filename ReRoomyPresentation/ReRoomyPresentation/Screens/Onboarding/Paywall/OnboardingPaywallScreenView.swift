@@ -13,6 +13,7 @@ final class ScreenView: StatusBarScreenView {
     
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
+    let longTermPlanButton = LongTermPlanButton()
     
     // MARK: - Setup
     
@@ -22,6 +23,8 @@ final class ScreenView: StatusBarScreenView {
         setupTitleLabel()
         addSubview(subtitleLabel)
         setupSubtitleLabel()
+        addSubview(longTermPlanButton)
+        setupLongTermPlanButton()
         setAppearance(appearance)
     }
     
@@ -35,21 +38,28 @@ final class ScreenView: StatusBarScreenView {
         subtitleLabel.textAlignment = .center
     }
     
+    private func setupLongTermPlanButton() {
+        longTermPlanButton.layer.cornerRadius = 20
+        longTermPlanButton.layer.masksToBounds = true
+    }
+    
     // MARK: - Layout
     
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutTitleLabel()
         layoutSubtitleLabel()
+        layoutLongTermPlanButton()
     }
     
+    private static let contentLeadingTrailing: CGFloat = 16
+    
     private static let titleLabelTop: CGFloat = 24
-    private static let titleLabelLeadingTrailing: CGFloat = 16
     
     private func layoutTitleLabel() {
-        let x = Self.titleLabelLeadingTrailing
+        let x = Self.contentLeadingTrailing
         let y = statusBarView.frame.maxY + Self.titleLabelTop
-        let width = bounds.width - x - Self.titleLabelLeadingTrailing
+        let width = bounds.width - x - Self.contentLeadingTrailing
         let sizeToFit = CGSize(width: width, height: .greatestFiniteMagnitude)
         let sizeThatFits = titleLabel.sizeThatFits(sizeToFit)
         let height = sizeThatFits.height
@@ -70,13 +80,23 @@ final class ScreenView: StatusBarScreenView {
         subtitleLabel.frame = frame
     }
     
+    private func layoutLongTermPlanButton() {
+        let x = Self.contentLeadingTrailing
+        let width = bounds.width - Self.contentLeadingTrailing * 2
+        let height = longTermPlanButton.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
+        let y = subtitleLabel.frame.maxY + 50
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        longTermPlanButton.frame = frame
+    }
+    
     // MARK: - Appearance
     
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
-        backgroundColor = appearance.colors.primaryBackground
+        backgroundColor = .brown
         titleLabel.font = appearance.fonts.primary(size: 40, weight: .heavy)
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
+        longTermPlanButton.setAppearance(appearance)
     }
 }
 }
