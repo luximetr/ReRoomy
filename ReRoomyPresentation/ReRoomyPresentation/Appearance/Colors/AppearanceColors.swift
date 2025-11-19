@@ -14,5 +14,6 @@ protocol AppearanceColors {
     var primaryText: UIColor { get }
     var secondaryText: UIColor { get }
     var primaryContrastText: UIColor { get }
+    var successText: UIColor { get }
     
 }

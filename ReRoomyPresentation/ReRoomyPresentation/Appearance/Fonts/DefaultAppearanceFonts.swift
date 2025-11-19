@@ -6,4 +6,10 @@ struct DefaultAppearanceFonts: AppearanceFonts {
         return UIFont.systemFont(ofSize: size, weight: weight)
     }
     
+    func primaryRounded(size: CGFloat, weight: UIFont.Weight) -> UIFont {
+        let fontDescriptor = primary(size: size, weight: weight).fontDescriptor
+        let roundedFontDescritor = fontDescriptor.withDesign(.rounded) ?? fontDescriptor
+        return UIFont(descriptor: roundedFontDescritor, size: size)
+    }
+    
 }

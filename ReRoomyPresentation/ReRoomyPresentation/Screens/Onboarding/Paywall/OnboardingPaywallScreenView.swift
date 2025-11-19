@@ -17,6 +17,8 @@ final class ScreenView: StatusBarScreenView {
     let longTermPlanButton = LongTermPlanButton()
     let regularTermPlanButton = RegularTermPlanButton()
     let trialToggleButton = TrialToggleButton()
+    let continueButton = TextFilledButton()
+    let footerView = FooterView()
     
     // MARK: - Setup
     
@@ -31,6 +33,8 @@ final class ScreenView: StatusBarScreenView {
         addSubview(longTermPlanButton)
         addSubview(regularTermPlanButton)
         addSubview(trialToggleButton)
+        addSubview(continueButton)
+        addSubview(footerView)
         setAppearance(appearance)
     }
     
@@ -55,6 +59,8 @@ final class ScreenView: StatusBarScreenView {
         layoutTitleLabel()
         layoutSubtitleLabel()
         layoutBannerImageView()
+        layoutFooterView()
+        layoutContinueButton()
         layoutLongTermPlanButton()
         layoutRegularTermPlanButton()
         layoutTrialToggleButton()
@@ -86,6 +92,33 @@ final class ScreenView: StatusBarScreenView {
         let height = sizeThatFits.height
         let frame = CGRect(x: x, y: y, width: width, height: height)
         subtitleLabel.frame = frame
+    }
+    
+    private static let footerViewMinLeadingTrailing: CGFloat = 16
+    private static let footerViewBottom: CGFloat = -3
+    
+    private func layoutFooterView() {
+        let widthToFit = bounds.width - Self.footerViewMinLeadingTrailing * 2
+        let sizeThatFits = footerView.sizeThatFits(CGSize(width: widthToFit, height: .greatestFiniteMagnitude))
+        let height = sizeThatFits.height
+        let width = sizeThatFits.width
+        let y = bounds.height - safeAreaInsets.bottom - height - Self.footerViewBottom
+        let x = (bounds.width - width) / 2
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        footerView.frame = frame
+    }
+    
+    private static let continueButtonLeadingTrailing: CGFloat = 16
+    private static let continueButtonHeight: CGFloat = 54
+    private static let continueButtonBottom: CGFloat = 4
+    
+    private func layoutContinueButton() {
+        let x = Self.continueButtonLeadingTrailing
+        let width = bounds.width - Self.continueButtonLeadingTrailing * 2
+        let height = Self.continueButtonHeight
+        let y = footerView.frame.minY - height - Self.continueButtonBottom
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        continueButton.frame = frame
     }
     
     private func layoutBannerImageView() {
@@ -138,6 +171,22 @@ final class ScreenView: StatusBarScreenView {
         longTermPlanButton.setAppearance(appearance)
         regularTermPlanButton.setAppearance(appearance)
         trialToggleButton.setAppearance(appearance)
+        continueButton.setAppearance(appearance)
+        footerView.setAppearance(appearance)
+    }
+    
+    // MARK: - Footer
+    
+    func showPurchaseFooter(title: String) {
+        footerView.imageView.image = appearance.images.tickShield
+        footerView.imageView.tintColor = appearance.colors.successText
+        footerView.titleLabel.text = title
+    }
+    
+    func showTrialFooter(title: String) {
+        footerView.imageView.image = appearance.images.tickCircle
+        footerView.imageView.tintColor = appearance.colors.primaryText
+        footerView.titleLabel.text = title
     }
 }
 }

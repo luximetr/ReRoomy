@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "purchaseFooterTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Secured by Apple"
+          }
+        }
+      }
+    },
     "subtitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,6 +30,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Try Unlimited"
+          }
+        }
+      }
+    },
+    "trialFooterTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No payment now"
           }
         }
       }

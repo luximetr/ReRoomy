@@ -48,6 +48,8 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     private func setLocalizedContent() {
         screenView.titleLabel.text = localizer.localizeText("title")
         screenView.subtitleLabel.text = localizer.localizeText("subtitle")
+        screenView.showPurchaseFooter(title: localizer.localizeText("purchaseFooterTitle"))
+        screenView.continueButton.title = "Test"
     }
 
     // MARK: - Long term plan
