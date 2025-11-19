@@ -15,6 +15,11 @@ struct DarkAppearanceColors: AppearanceColors {
     let successActionBackground = UIColor(red: 0.349, green: 0.773, blue: 0.494, alpha: 1)
     let successActionDisabledBackground = UIColor(red: 0.38, green: 0.42, blue: 0.55, alpha: 1)
     let primaryText = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+    let primaryTextGradient: [CGColor] = [
+        UIColor(red: 0.45, green: 0.44, blue: 0.61, alpha: 0.9).cgColor,
+        UIColor(red: 0.72, green: 0.76, blue: 1.00, alpha: 0.9).cgColor,
+        UIColor(red: 0.58, green: 0.66, blue: 0.99, alpha: 0.9).cgColor
+    ]
     let secondaryText = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
     let primaryContrastText = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
     let successText: UIColor = UIColor(red: 0, green: 0.89, blue: 0.52, alpha: 1)

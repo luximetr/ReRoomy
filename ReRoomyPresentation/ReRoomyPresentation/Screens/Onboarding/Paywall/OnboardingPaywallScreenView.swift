@@ -12,7 +12,7 @@ final class ScreenView: StatusBarScreenView {
     // MARK: - Subviews
     
     let backgroundPatternImageView = UIImageView()
-    let titleLabel = UILabel()
+    let titleLabel = GradientLabel()
     let subtitleLabel = UILabel()
     let bannerImageView = UIImageView()
     let longTermPlanButton = LongTermPlanButton()
@@ -48,6 +48,8 @@ final class ScreenView: StatusBarScreenView {
     private func setupTitleLabel() {
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
+        titleLabel.gradientStartPoint = CGPoint(x: 0.0, y: 0.5)
+        titleLabel.gradientEndPoint = CGPoint(x: 1.0, y: 0.5)
     }
     
     private func setupSubtitleLabel() {
@@ -183,6 +185,7 @@ final class ScreenView: StatusBarScreenView {
         backgroundColor = appearance.colors.primaryBackground
         backgroundPatternImageView.image = appearance.images.paywallBackgroundPatter
         titleLabel.textColor = appearance.colors.primaryText
+        titleLabel.gradientColors = appearance.colors.primaryTextGradient
         titleLabel.font = appearance.fonts.primary(size: 40, weight: .heavy)
         subtitleLabel.textColor = appearance.colors.primaryText
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)

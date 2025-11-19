@@ -12,6 +12,7 @@ protocol AppearanceColors {
     var successActionBackground: UIColor { get }
     var successActionDisabledBackground: UIColor { get }
     var primaryText: UIColor { get }
+    var primaryTextGradient: [CGColor] { get }
     var secondaryText: UIColor { get }
     var primaryContrastText: UIColor { get }
     var successText: UIColor { get }

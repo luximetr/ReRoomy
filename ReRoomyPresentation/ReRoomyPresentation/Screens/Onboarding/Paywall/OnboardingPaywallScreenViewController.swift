@@ -57,7 +57,7 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.regularTermPlanButton.priceLabel.text = localizer.localizeText("weeklyPlanTrialPrice")
         screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("yearlyPlanDiscount", "85%")
         screenView.longTermPlanButton.titleLabel.text = localizer.localizeText("yearlyPlanTitle")
-        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("yearlyPlanPriceTitle")
+        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("yearlyPlanPrice", "0")
         screenView.longTermPlanButton.pricePerDayValueLabel.text = "$0.1"
         screenView.longTermPlanButton.pricePerDayTitleLabel.text = localizer.localizeText("yearlyPlanPriceTitle")
         screenView.trialToggleButton.titleLabel.text = localizer.localizeText("trialFooterTitle")
@@ -76,7 +76,7 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     }
     
     private func showUnlimitedPlans(_ plans: UnlimitedPlans) {
-        screenView.longTermPlanButton.subtitleLabel.text = plans.yearly.priceFormatted
+        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("yearlyPlanPrice", plans.yearly.priceFormatted)
         screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("weeklyPlanPrice", plans.weekly.priceFormatted)
     }
     
