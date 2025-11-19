@@ -25,7 +25,7 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonTouchUpInside), for: .touchUpInside)
         screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonValueChanged), for: .valueChanged)
         setLocalizedContent()
-        showSelectedPlanSelection(.yearly, animated: false)
+        showSelectedPlanSelection(.longTerm, animated: false)
         loadUnlimitedPlans()
     }
     
@@ -45,21 +45,21 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     override func setLocale(_ locale: Locale) {
         super.setLocale(locale)
         setLocalizedContent()
-        showSelectedPlanSelection(.yearly, animated: false)
+        showSelectedPlanSelection(selectedPlanSelection, animated: false)
     }
     
     private func setLocalizedContent() {
         screenView.titleLabel.text = localizer.localizeText("title")
         screenView.subtitleLabel.text = localizer.localizeText("subtitle")
         screenView.showPurchaseFooter(title: localizer.localizeText("purchaseFooterTitle"))
-        screenView.regularTermPlanButton.titleLabel.text = localizer.localizeText("weeklyPlanTrialDuration")
-        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("weeklyPlanPrice", "0")
-        screenView.regularTermPlanButton.priceLabel.text = localizer.localizeText("weeklyPlanTrialPrice")
-        screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("yearlyPlanDiscount", "85%")
-        screenView.longTermPlanButton.titleLabel.text = localizer.localizeText("yearlyPlanTitle")
-        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("yearlyPlanPrice", "0")
+        screenView.regularTermPlanButton.titleLabel.text = localizer.localizeText("regularTermPlanTrialDuration")
+        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("regularTermPlanPrice", "0")
+        screenView.regularTermPlanButton.priceLabel.text = localizer.localizeText("regularTermPlanTrialPrice")
+        screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("longTermPlanDiscount", "85%")
+        screenView.longTermPlanButton.titleLabel.text = localizer.localizeText("longTermPlanTitle")
+        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("longTermPlanPrice", "0")
         screenView.longTermPlanButton.pricePerDayValueLabel.text = "$0.1"
-        screenView.longTermPlanButton.pricePerDayTitleLabel.text = localizer.localizeText("yearlyPlanPriceTitle")
+        screenView.longTermPlanButton.pricePerDayTitleLabel.text = localizer.localizeText("longTermPlanPriceTitle")
         screenView.trialToggleButton.titleLabel.text = localizer.localizeText("trialFooterTitle")
     }
     
@@ -76,18 +76,18 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     }
     
     private func showUnlimitedPlans(_ plans: UnlimitedPlans) {
-        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("yearlyPlanPrice", plans.yearly.priceFormatted)
-        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("weeklyPlanPrice", plans.weekly.priceFormatted)
+        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("longTermPlanPrice", plans.yearly.priceFormatted)
+        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("regularTermPlanPrice", plans.weekly.priceFormatted)
     }
     
     // MARK: - Plan option
     
     private enum PlanSelection {
-        case yearly
-        case weekly
+        case longTerm
+        case regularTerm
     }
     
-    private var selectedPlanSelection: PlanSelection = .yearly
+    private var selectedPlanSelection: PlanSelection = .longTerm
     
     private func setSelectedPlanSelection(_ selection: PlanSelection, animated: Bool) {
         selectedPlanSelection = selection
@@ -96,22 +96,22 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     
     private func showSelectedPlanSelection(_ option: PlanSelection, animated: Bool) {
         switch option {
-        case .yearly:
-            showYearlyPlanSelected(animated: animated)
-        case .weekly:
-            showWeeklyPlanSelected(animated: animated)
+        case .longTerm:
+            showLongTermPlanSelected(animated: animated)
+        case .regularTerm:
+            showRegularTermPlanSelected(animated: animated)
         }
     }
 
     // MARK: - Long term plan
 
     @objc private func longTermPlanButtonTouchUpInside() {
-        guard selectedPlanSelection != .yearly else { return }
-        selectedPlanSelection = .yearly
+        guard selectedPlanSelection != .longTerm else { return }
+        selectedPlanSelection = .longTerm
         showSelectedPlanSelection(selectedPlanSelection, animated: true)
     }
     
-    private func showYearlyPlanSelected(animated: Bool) {
+    private func showLongTermPlanSelected(animated: Bool) {
         screenView.longTermPlanButton.isSelected = true
         screenView.regularTermPlanButton.isSelected = false
         screenView.trialToggleButton.set(isSelected: false, animated: animated)
@@ -122,12 +122,12 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     // MARK: - Regular term plan
     
     @objc private func regularTermPlanButtonTouchUpInside() {
-        guard selectedPlanSelection != .weekly else { return }
-        selectedPlanSelection = .weekly
+        guard selectedPlanSelection != .regularTerm else { return }
+        selectedPlanSelection = .regularTerm
         showSelectedPlanSelection(selectedPlanSelection, animated: true)
     }
     
-    private func showWeeklyPlanSelected(animated: Bool) {
+    private func showRegularTermPlanSelected(animated: Bool) {
         screenView.longTermPlanButton.isSelected = false
         screenView.regularTermPlanButton.isSelected = true
         screenView.trialToggleButton.set(isSelected: true, animated: animated)
@@ -148,10 +148,10 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     private func togglePlanSelection(animated: Bool) {
         var updatedSelectedPlanSelection: PlanSelection = selectedPlanSelection
         switch selectedPlanSelection {
-        case .yearly:
-            updatedSelectedPlanSelection = .weekly
-        case .weekly:
-            updatedSelectedPlanSelection = .yearly
+        case .longTerm:
+            updatedSelectedPlanSelection = .regularTerm
+        case .regularTerm:
+            updatedSelectedPlanSelection = .longTerm
         }
         setSelectedPlanSelection(updatedSelectedPlanSelection, animated: animated)
     }
