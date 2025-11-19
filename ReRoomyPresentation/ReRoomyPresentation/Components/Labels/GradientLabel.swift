@@ -28,42 +28,42 @@ class GradientLabel: AUILabel {
     // MARK: - Text
     
     override var text: String? {
-        get { contentLabel.text }
         set { contentLabel.text = newValue }
+        get { contentLabel.text }
     }
     
     // MARK: - Gradient
     
     var gradientColors: [CGColor] {
-        get { gradientLayer.colors as? [CGColor] ?? [] }
         set { gradientLayer.colors = newValue }
+        get { gradientLayer.colors as? [CGColor] ?? [] }
     }
     
     var gradientStartPoint: CGPoint {
-        get { gradientLayer.startPoint }
         set { gradientLayer.startPoint = newValue }
+        get { gradientLayer.startPoint }
     }
     
     var gradientEndPoint: CGPoint {
-        get { gradientLayer.endPoint }
         set { gradientLayer.endPoint = newValue }
+        get { gradientLayer.endPoint }
     }
     
-    // MARK: - Text formatting
+    // MARK: - Formatting
     
     override var font: UIFont! {
-        get { contentLabel.font }
         set { contentLabel.font = newValue }
+        get { contentLabel.font }
     }
     
     override var textColor: UIColor! {
-        get { contentLabel.textColor }
         set { contentLabel.textColor = newValue }
+        get { contentLabel.textColor }
     }
     
     override var textAlignment: NSTextAlignment {
-        get { contentLabel.textAlignment }
         set { contentLabel.textAlignment = newValue }
+        get { contentLabel.textAlignment }
     }
     
     // MARK: - Size

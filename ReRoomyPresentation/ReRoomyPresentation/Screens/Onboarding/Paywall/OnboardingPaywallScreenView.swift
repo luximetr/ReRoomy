@@ -11,6 +11,7 @@ final class ScreenView: StatusBarScreenView {
     
     // MARK: - Subviews
     
+    let backgroundImageView = BlurImageView()
     let backgroundPatternImageView = UIImageView()
     let titleLabel = GradientLabel()
     let subtitleLabel = UILabel()
@@ -25,6 +26,8 @@ final class ScreenView: StatusBarScreenView {
     
     override func setup() {
         super.setup()
+        addSubview(backgroundImageView)
+        setupBackgroundImageView()
         addSubview(backgroundPatternImageView)
         setupBackgroundPatternImageView()
         addSubview(titleLabel)
@@ -41,8 +44,13 @@ final class ScreenView: StatusBarScreenView {
         setAppearance(appearance)
     }
     
+    private func setupBackgroundImageView() {
+        backgroundImageView.contentMode = .scaleAspectFill
+    }
+    
     private func setupBackgroundPatternImageView() {
         backgroundPatternImageView.contentMode = .scaleAspectFill
+        backgroundPatternImageView.alpha = 0.15
     }
     
     private func setupTitleLabel() {
@@ -65,6 +73,7 @@ final class ScreenView: StatusBarScreenView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        layoutBackgroundImageView()
         layoutBackgroundPatternImageView()
         layoutTitleLabel()
         layoutSubtitleLabel()
@@ -77,6 +86,10 @@ final class ScreenView: StatusBarScreenView {
     }
     
     private static let contentLeadingTrailing: CGFloat = 16
+    
+    private func layoutBackgroundImageView() {
+        backgroundImageView.frame = bounds
+    }
     
     private func layoutBackgroundPatternImageView() {
         backgroundPatternImageView.frame = bounds
@@ -183,6 +196,7 @@ final class ScreenView: StatusBarScreenView {
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
         backgroundColor = appearance.colors.primaryBackground
+        backgroundImageView.setImage(appearance.images.paywallBackground, blurRadius: 226) 
         backgroundPatternImageView.image = appearance.images.paywallBackgroundPatter
         titleLabel.textColor = appearance.colors.primaryText
         titleLabel.gradientColors = appearance.colors.primaryTextGradient
