@@ -61,6 +61,7 @@ final class TrialToggleButton: LazyAppearanceButton {
         let x = bounds.width - width - Self.toggleTrailing
         let y = (bounds.height - height) / 2
         toggle.frame = CGRect(x: x, y: y, width: width, height: height)
+        toggle.layer.cornerRadius = height / 2
     }
 
     // MARK: - Size
@@ -83,6 +84,8 @@ final class TrialToggleButton: LazyAppearanceButton {
         backgroundColor = appearance.colors.secondaryBackground
         titleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         titleLabel.textColor = appearance.colors.primaryText
+        toggle.tintColor = appearance.colors.successActionDisabledBackground
+        toggle.backgroundColor = toggle.tintColor
         toggle.onTintColor = appearance.colors.successActionBackground
         showIsSelected(isSelected, animated: false)
     }
