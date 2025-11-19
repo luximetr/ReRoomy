@@ -12,8 +12,10 @@ struct LightAppearanceColors: AppearanceColors {
     let primaryContrastBackground = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
     let primaryActionBackground = UIColor(red: 0.167, green: 0.404, blue: 0.758, alpha: 1)
     let primaryActionText = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+    let successActionBackground = UIColor(red: 0.349, green: 0.773, blue: 0.494, alpha: 1.0)
     let primaryText = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
     let secondaryText = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
     let primaryContrastText = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+    
     
 }

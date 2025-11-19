@@ -22,6 +22,8 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         super.viewDidLoad()
         screenView.longTermPlanButton.addTarget(self, action: #selector(longTermPlanButtonTouchUpInside), for: .touchUpInside)
         screenView.regularTermPlanButton.addTarget(self, action: #selector(regularTermPlanButtonTouchUpInside), for: .touchUpInside)
+        screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonTouchUpInside), for: .touchUpInside)
+        screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonValueChanged), for: .valueChanged)
         setLocalizedContent()
     }
     
@@ -58,5 +60,15 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     
     @objc private func regularTermPlanButtonTouchUpInside() {
         screenView.regularTermPlanButton.isSelected.toggle()
+    }
+
+    // MARK: - Trial
+
+    @objc private func trialToggleButtonTouchUpInside() {
+        screenView.trialToggleButton.set(isSelected: !screenView.trialToggleButton.isSelected, animated: true)
+    }
+
+    @objc private func trialToggleButtonValueChanged() {
+        print("value changed")
     }
 }

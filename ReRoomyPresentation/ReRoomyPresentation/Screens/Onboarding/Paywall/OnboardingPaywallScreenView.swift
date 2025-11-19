@@ -15,6 +15,7 @@ final class ScreenView: StatusBarScreenView {
     let subtitleLabel = UILabel()
     let longTermPlanButton = LongTermPlanButton()
     let regularTermPlanButton = RegularTermPlanButton()
+    let trialToggleButton = TrialToggleButton()
     
     // MARK: - Setup
     
@@ -26,6 +27,7 @@ final class ScreenView: StatusBarScreenView {
         setupSubtitleLabel()
         addSubview(longTermPlanButton)
         addSubview(regularTermPlanButton)
+        addSubview(trialToggleButton)
         setAppearance(appearance)
     }
     
@@ -47,6 +49,7 @@ final class ScreenView: StatusBarScreenView {
         layoutSubtitleLabel()
         layoutLongTermPlanButton()
         layoutRegularTermPlanButton()
+        layoutTrialToggleButton()
     }
     
     private static let contentLeadingTrailing: CGFloat = 16
@@ -95,6 +98,15 @@ final class ScreenView: StatusBarScreenView {
         regularTermPlanButton.frame = frame
     }
     
+    private func layoutTrialToggleButton() {
+        let x = Self.contentLeadingTrailing
+        let width = bounds.width - Self.contentLeadingTrailing * 2
+        let height = trialToggleButton.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
+        let y = regularTermPlanButton.frame.maxY + 16
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        trialToggleButton.frame = frame
+    }
+    
     // MARK: - Appearance
     
     override func setAppearance(_ appearance: any Appearance) {
@@ -104,6 +116,7 @@ final class ScreenView: StatusBarScreenView {
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         longTermPlanButton.setAppearance(appearance)
         regularTermPlanButton.setAppearance(appearance)
+        trialToggleButton.setAppearance(appearance)
     }
 }
 }

@@ -9,6 +9,7 @@ protocol AppearanceColors {
     var primaryContrastBackground: UIColor { get }
     var primaryActionBackground: UIColor { get }
     var primaryActionText: UIColor { get }
+    var successActionBackground: UIColor { get }
     var primaryText: UIColor { get }
     var secondaryText: UIColor { get }
     var primaryContrastText: UIColor { get }
