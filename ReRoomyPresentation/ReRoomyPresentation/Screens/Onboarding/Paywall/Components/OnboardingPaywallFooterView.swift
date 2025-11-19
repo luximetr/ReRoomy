@@ -45,7 +45,7 @@ class FooterView: LazyAppearanceView {
         imageView.frame = frame
     }
     
-    private static let titleLabelLeading: CGFloat = -2
+    private static let titleLabelLeading: CGFloat = 2
     private static let titleLabelTop: CGFloat = 5
     private static let titleLabelBottom: CGFloat = 5
     

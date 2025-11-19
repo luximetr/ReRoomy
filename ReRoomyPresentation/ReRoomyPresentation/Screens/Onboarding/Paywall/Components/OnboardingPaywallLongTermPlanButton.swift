@@ -188,6 +188,7 @@ class LongTermPlanButton: LazyAppearanceButton {
         gradientLayer.colors = appearance.colors.secondaryBackgroundGradient
         discountBackgroundView.backgroundColor = appearance.colors.primaryContrastBackground
         discountLabel.textColor = appearance.colors.primaryContrastText
+        discountLabel.font = appearance.fonts.primary(size: 14, weight: .semibold)
         titleLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         pricePerDayValueLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)

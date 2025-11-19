@@ -25,6 +25,7 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonTouchUpInside), for: .touchUpInside)
         screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonValueChanged), for: .valueChanged)
         setLocalizedContent()
+        showSelectedPlanSelection(.yearly, animated: false)
         loadUnlimitedPlans()
     }
     
@@ -44,6 +45,7 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     override func setLocale(_ locale: Locale) {
         super.setLocale(locale)
         setLocalizedContent()
+        showSelectedPlanSelection(.yearly, animated: false)
     }
     
     private func setLocalizedContent() {
@@ -53,9 +55,10 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.regularTermPlanButton.titleLabel.text = localizer.localizeText("weeklyPlanTrialDuration")
         screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("weeklyPlanPrice", "0")
         screenView.regularTermPlanButton.priceLabel.text = localizer.localizeText("weeklyPlanTrialPrice")
+        screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("yearlyPlanDiscount", "85%")
         screenView.longTermPlanButton.titleLabel.text = localizer.localizeText("yearlyPlanTitle")
         screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("yearlyPlanPriceTitle")
-        screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("yearlyPlanDiscount", "85%")
+        screenView.longTermPlanButton.pricePerDayTitleLabel.text = localizer.localizeText("yearlyPlanPriceTitle")
         screenView.trialToggleButton.titleLabel.text = localizer.localizeText("trialFooterTitle")
         screenView.continueButton.title = "Test"
     }
@@ -76,26 +79,80 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.longTermPlanButton.subtitleLabel.text = plans.yearly.priceFormatted
         screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("weeklyPlanPrice", plans.weekly.priceFormatted)
     }
+    
+    // MARK: - Plan option
+    
+    private enum PlanSelection {
+        case yearly
+        case weekly
+    }
+    
+    private var selectedPlanSelection: PlanSelection = .yearly
+    
+    private func setSelectedPlanSelection(_ selection: PlanSelection, animated: Bool) {
+        selectedPlanSelection = selection
+        showSelectedPlanSelection(selection, animated: animated)
+    }
+    
+    private func showSelectedPlanSelection(_ option: PlanSelection, animated: Bool) {
+        switch option {
+        case .yearly:
+            showYearlyPlanSelected(animated: animated)
+        case .weekly:
+            showWeeklyPlanSelected(animated: animated)
+        }
+    }
 
     // MARK: - Long term plan
 
     @objc private func longTermPlanButtonTouchUpInside() {
-        screenView.longTermPlanButton.isSelected.toggle()
+        guard selectedPlanSelection != .yearly else { return }
+        selectedPlanSelection = .yearly
+        showSelectedPlanSelection(selectedPlanSelection, animated: true)
+    }
+    
+    private func showYearlyPlanSelected(animated: Bool) {
+        screenView.longTermPlanButton.isSelected = true
+        screenView.regularTermPlanButton.isSelected = false
+        screenView.trialToggleButton.set(isSelected: false, animated: animated)
+        screenView.continueButton.title = localizer.localizeText("continueButtonPurchaseTitle")
+        screenView.showPurchaseFooter(title: localizer.localizeText("purchaseFooterTitle"))
     }
     
     // MARK: - Regular term plan
     
     @objc private func regularTermPlanButtonTouchUpInside() {
-        screenView.regularTermPlanButton.isSelected.toggle()
+        guard selectedPlanSelection != .weekly else { return }
+        selectedPlanSelection = .weekly
+        showSelectedPlanSelection(selectedPlanSelection, animated: true)
+    }
+    
+    private func showWeeklyPlanSelected(animated: Bool) {
+        screenView.longTermPlanButton.isSelected = false
+        screenView.regularTermPlanButton.isSelected = true
+        screenView.trialToggleButton.set(isSelected: true, animated: animated)
+        screenView.continueButton.title = localizer.localizeText("continueButtonTrialTitle")
+        screenView.showTrialFooter(title: localizer.localizeText("trialFooterTitle"))
     }
 
     // MARK: - Trial
 
     @objc private func trialToggleButtonTouchUpInside() {
-        screenView.trialToggleButton.set(isSelected: !screenView.trialToggleButton.isSelected, animated: true)
+        togglePlanSelection(animated: true)
     }
 
     @objc private func trialToggleButtonValueChanged() {
-        print("value changed")
+        togglePlanSelection(animated: true)
+    }
+    
+    private func togglePlanSelection(animated: Bool) {
+        var updatedSelectedPlanSelection: PlanSelection = selectedPlanSelection
+        switch selectedPlanSelection {
+        case .yearly:
+            updatedSelectedPlanSelection = .weekly
+        case .weekly:
+            updatedSelectedPlanSelection = .yearly
+        }
+        setSelectedPlanSelection(updatedSelectedPlanSelection, animated: animated)
     }
 }
