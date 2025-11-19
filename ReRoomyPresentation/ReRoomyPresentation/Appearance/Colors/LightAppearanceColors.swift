@@ -3,7 +3,7 @@ import UIKit
 struct LightAppearanceColors: AppearanceColors {
     
     let statusBarStyle = UIStatusBarStyle.darkContent
-    let primaryBackground = UIColor(red: 0.977, green: 0.977, blue: 0.977, alpha: 1)
+    let primaryBackground = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
     let secondaryBackground = UIColor(red: 0.16, green: 0.21, blue: 0.37, alpha: 1)
     let secondaryBackgroundGradient: [CGColor] = [
         UIColor(red: 0.23, green: 0.29, blue: 0.46, alpha: 1).cgColor,

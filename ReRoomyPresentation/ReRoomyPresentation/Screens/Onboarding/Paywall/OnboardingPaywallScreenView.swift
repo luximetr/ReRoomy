@@ -13,6 +13,7 @@ final class ScreenView: StatusBarScreenView {
     
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
+    let bannerImageView = UIImageView()
     let longTermPlanButton = LongTermPlanButton()
     let regularTermPlanButton = RegularTermPlanButton()
     let trialToggleButton = TrialToggleButton()
@@ -25,6 +26,8 @@ final class ScreenView: StatusBarScreenView {
         setupTitleLabel()
         addSubview(subtitleLabel)
         setupSubtitleLabel()
+        addSubview(bannerImageView)
+        setupBannerImageView()
         addSubview(longTermPlanButton)
         addSubview(regularTermPlanButton)
         addSubview(trialToggleButton)
@@ -41,12 +44,17 @@ final class ScreenView: StatusBarScreenView {
         subtitleLabel.textAlignment = .center
     }
     
+    private func setupBannerImageView() {
+        bannerImageView.contentMode = .scaleAspectFit
+    }
+    
     // MARK: - Layout
     
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutTitleLabel()
         layoutSubtitleLabel()
+        layoutBannerImageView()
         layoutLongTermPlanButton()
         layoutRegularTermPlanButton()
         layoutTrialToggleButton()
@@ -80,11 +88,21 @@ final class ScreenView: StatusBarScreenView {
         subtitleLabel.frame = frame
     }
     
+    private func layoutBannerImageView() {
+        let x: CGFloat = 0
+        let y = subtitleLabel.frame.maxY + 20
+        let width = bounds.width
+        let aspectRation: CGFloat = 0.7511210762
+        let height = width * aspectRation
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        bannerImageView.frame = frame
+    }
+    
     private func layoutLongTermPlanButton() {
         let x = Self.contentLeadingTrailing
         let width = bounds.width - Self.contentLeadingTrailing * 2
         let height = longTermPlanButton.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
-        let y = subtitleLabel.frame.maxY + 50
+        let y = bannerImageView.frame.maxY - 16
         let frame = CGRect(x: x, y: y, width: width, height: height)
         longTermPlanButton.frame = frame
     }
@@ -111,9 +129,12 @@ final class ScreenView: StatusBarScreenView {
     
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
-        backgroundColor = .brown
+        backgroundColor = appearance.colors.primaryBackground
+        titleLabel.textColor = appearance.colors.primaryText
         titleLabel.font = appearance.fonts.primary(size: 40, weight: .heavy)
+        subtitleLabel.textColor = appearance.colors.primaryText
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
+        bannerImageView.image = appearance.images.paywallBanner
         longTermPlanButton.setAppearance(appearance)
         regularTermPlanButton.setAppearance(appearance)
         trialToggleButton.setAppearance(appearance)

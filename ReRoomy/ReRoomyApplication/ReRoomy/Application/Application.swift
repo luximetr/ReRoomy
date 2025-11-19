@@ -28,7 +28,7 @@ class Application: NSObject, UIApplicationDelegate {
     var presentation: PresentationProtocol!
     
     func initializePresentation() throws {
-        let presentationAppearanceSetting: PresentationAppearanceSetting = .light
+        let presentationAppearanceSetting: PresentationAppearanceSetting = .dark
         let presentationLocale = LocaleMapper.mapToPresentation(locale: locale)
         let presentation: PresentationProtocol = Presentation(locale: presentationLocale, time: time, appearanceSetting: presentationAppearanceSetting)
         self.presentation = presentation
