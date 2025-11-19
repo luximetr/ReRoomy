@@ -11,7 +11,7 @@ final class ScreenView: StatusBarScreenView {
     
     // MARK: - Subviews
     
-    let backgroundImageView = BlurImageView()
+    let backgroundImageView = UIImageView()
     let backgroundPatternImageView = UIImageView()
     let titleLabel = GradientLabel()
     let subtitleLabel = UILabel()
@@ -196,7 +196,7 @@ final class ScreenView: StatusBarScreenView {
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
         backgroundColor = appearance.colors.primaryBackground
-        backgroundImageView.setImage(appearance.images.paywallBackground, blurRadius: 226) 
+        backgroundImageView.image = appearance.images.paywallBackground
         backgroundPatternImageView.image = appearance.images.paywallBackgroundPatter
         titleLabel.textColor = appearance.colors.primaryText
         titleLabel.gradientColors = appearance.colors.primaryTextGradient
