@@ -140,9 +140,9 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     }
     
     private func showLongTermPlanSelected(animated: Bool) {
-        screenView.longTermPlanButton.isSelected = true
-        screenView.regularTermPlanButton.isSelected = false
-        screenView.trialToggleButton.set(isSelected: false, animated: animated)
+        screenView.longTermPlanButton.setIsSelected(true, animated: animated)
+        screenView.regularTermPlanButton.setIsSelected(false, animated: animated)
+        screenView.trialToggleButton.setIsSelected(false, animated: animated)
         screenView.continueButton.title = localizer.localizeText("continueButtonPurchaseTitle")
         screenView.showPurchaseFooter(title: localizer.localizeText("purchaseFooterTitle"))
     }
@@ -156,9 +156,9 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     }
     
     private func showRegularTermPlanSelected(animated: Bool) {
-        screenView.longTermPlanButton.isSelected = false
-        screenView.regularTermPlanButton.isSelected = true
-        screenView.trialToggleButton.set(isSelected: true, animated: animated)
+        screenView.longTermPlanButton.setIsSelected(false, animated: animated)
+        screenView.regularTermPlanButton.setIsSelected(true, animated: animated)
+        screenView.trialToggleButton.setIsSelected(true, animated: animated)
         screenView.continueButton.title = localizer.localizeText("continueButtonTrialTitle")
         screenView.showTrialFooter(title: localizer.localizeText("trialFooterTitle"))
     }

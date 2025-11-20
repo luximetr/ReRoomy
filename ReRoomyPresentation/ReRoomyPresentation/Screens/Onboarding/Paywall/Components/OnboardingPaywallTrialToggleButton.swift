@@ -107,17 +107,8 @@ final class TrialToggleButton: LazyAppearanceButton {
     }
     
     private func showIsHighlighted(_ isHighlightedUpdated: Bool) {
-        let targetAlpha: CGFloat = isHighlightedUpdated ? 0.8 : 1.0
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            options: [.allowUserInteraction, .curveEaseInOut],
-            animations: { [weak self] in
-                guard let self = self else { return }
-                self.titleLabel.alpha = targetAlpha
-            },
-            completion: nil
-        )
+        let targetAlpha: Float = isHighlightedUpdated ? 0.8 : 1.0
+        AnimationHelper.animateViewsAlpha(of: [titleLabel], to: targetAlpha)
     }
     
     // MARK: - Selected
@@ -128,7 +119,7 @@ final class TrialToggleButton: LazyAppearanceButton {
         }
     }
     
-    func set(isSelected: Bool, animated: Bool) {
+    func setIsSelected(_ isSelected: Bool, animated: Bool) {
         super.isSelected = isSelected
         showIsSelected(isSelected, animated: animated)
     }
@@ -143,19 +134,30 @@ final class TrialToggleButton: LazyAppearanceButton {
     }
     
     private func showSelected(appearance: any Appearance, animated: Bool) {
-        backgroundGradientView.isHidden = false
-        titleLabel.textColor = appearance.colors.primaryText
+        if animated {
+            AnimationHelper.animateOpacity(of: backgroundGradientView.layer, to: 1)
+            AnimationHelper.animateTextColor(of: [titleLabel], to: appearance.colors.primaryText)
+        } else {
+            backgroundGradientView.alpha = 1
+            titleLabel.textColor = appearance.colors.primaryText
+        }
+        
         toggle.setOn(true, animated: animated)
     }
     
     private func showDeselected(appearance: any Appearance, animated: Bool) {
-        backgroundGradientView.isHidden = true
-        titleLabel.textColor = appearance.colors.secondaryText
+        if animated {
+            AnimationHelper.animateOpacity(of: backgroundGradientView.layer, to: 0)
+            AnimationHelper.animateTextColor(of: [titleLabel], to: appearance.colors.secondaryText)
+        } else {
+            backgroundGradientView.alpha = 0
+            titleLabel.textColor = appearance.colors.secondaryText
+        }
+        
         toggle.setOn(false, animated: animated)
     }
     
     @objc private func toggleValueChanged() {
-        set(isSelected: toggle.isOn, animated: true)
         sendActions(for: .valueChanged)
     }
 }

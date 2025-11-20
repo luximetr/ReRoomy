@@ -190,7 +190,7 @@ class LongTermPlanButton: LazyAppearanceButton {
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         pricePerDayValueLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
         pricePerDayTitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
-        showIsSelected(isSelected)
+        showIsSelected(isSelected, animated: false)
     }
     
     // MARK: - Highlighted
@@ -203,49 +203,74 @@ class LongTermPlanButton: LazyAppearanceButton {
     
     private func showIsHighlighted(_ isHighlightedUpdated: Bool) {
         let highligtingViews = [discountLabel, titleLabel, subtitleLabel, pricePerDayValueLabel, pricePerDayTitleLabel]
-        let targetAlpha: CGFloat = isHighlightedUpdated ? 0.8 : 1.0
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            options: [.allowUserInteraction, .curveEaseInOut],
-            animations: {
-                highligtingViews.forEach({ $0.alpha = targetAlpha })
-            },
-            completion: nil
-        )
+        let targetAlpha: Float = isHighlightedUpdated ? 0.8 : 1.0
+        AnimationHelper.animateViewsAlpha(of: highligtingViews, to: targetAlpha)
     }
     
     // MARK: - Selected
     
     override var isSelected: Bool {
         willSet {
-            showIsSelected(newValue)
+            showIsSelected(newValue, animated: false)
         }
     }
     
-    private func showIsSelected(_ isSelectedUpdated: Bool) {
+    func setIsSelected(_ isSelected: Bool, animated: Bool) {
+        super.isSelected = isSelected
+        showIsSelected(isSelected, animated: animated)
+    }
+    
+    private func showIsSelected(_ isSelectedUpdated: Bool, animated: Bool) {
         guard let appearance = appearance else { return }
         if isSelectedUpdated {
-            showSelected(appearance: appearance)
+            showSelected(appearance: appearance, animated: animated)
         } else {
-            showDeselected(appearance: appearance)
+            showDeselected(appearance: appearance, animated: animated)
         }
     }
     
-    private func showSelected(appearance: any Appearance) {
+    private func showSelected(appearance: any Appearance, animated: Bool) {
+        if animated {
+            showSelectedAnimated(appearance: appearance)
+        } else {
+            showSelectedNonAnimated(appearance: appearance)
+        }
+    }
+    
+    private func showSelectedAnimated(appearance: any Appearance) {
+        AnimationHelper.animateBorder(of: layer, to: 1, color: appearance.colors.primaryContrastBackground.cgColor)
+        AnimationHelper.animateOpacity(of: backgroundGradientView.layer, to: 1)
+        AnimationHelper.animateTextColor(of: [titleLabel, subtitleLabel, pricePerDayValueLabel, pricePerDayTitleLabel], to: appearance.colors.primaryText)
+    }
+    
+    private func showSelectedNonAnimated(appearance: any Appearance) {
         layer.borderWidth = 1
         layer.borderColor = appearance.colors.primaryContrastBackground.cgColor
-        backgroundGradientView.isHidden = false
+        backgroundGradientView.layer.opacity = 1
         titleLabel.textColor = appearance.colors.primaryText
         subtitleLabel.textColor = appearance.colors.primaryText
         pricePerDayValueLabel.textColor = appearance.colors.primaryText
         pricePerDayTitleLabel.textColor = appearance.colors.primaryText
     }
     
-    private func showDeselected(appearance: any Appearance) {
+    private func showDeselected(appearance: any Appearance, animated: Bool) {
+        if animated {
+            showDeselectedAnimated(appearance: appearance)
+        } else {
+            showDeselectedNonAnimated(appearance: appearance)
+        }
+    }
+    
+    private func showDeselectedAnimated(appearance: any Appearance) {
+        AnimationHelper.animateBorder(of: layer, to: 0, color: nil)
+        AnimationHelper.animateOpacity(of: backgroundGradientView.layer, to: 0)
+        AnimationHelper.animateTextColor(of: [titleLabel, subtitleLabel, pricePerDayValueLabel, pricePerDayTitleLabel], to: appearance.colors.secondaryText)
+    }
+    
+    private func showDeselectedNonAnimated(appearance: any Appearance) {
         layer.borderWidth = 0
         layer.borderColor = nil
-        backgroundGradientView.isHidden = true
+        backgroundGradientView.layer.opacity = 0
         titleLabel.textColor = appearance.colors.secondaryText
         subtitleLabel.textColor = appearance.colors.secondaryText
         pricePerDayValueLabel.textColor = appearance.colors.secondaryText
