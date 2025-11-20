@@ -36,6 +36,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     }
     
     private func setupBackgroundGradientView() {
+        backgroundGradientView.isUserInteractionEnabled = false
         backgroundGradientView.gradientStartPoint = CGPoint(x: 0, y: 0.5)
         backgroundGradientView.gradientEndPoint = CGPoint(x: 1, y: 0.5)
     }

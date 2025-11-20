@@ -16,6 +16,7 @@ final class TrialToggleButton: LazyAppearanceButton {
         super.setup()
         layer.cornerRadius = 20
         layer.masksToBounds = true
+        addSubview(backgroundGradientView)
         setupBackgroundGradientLayer()
         addSubview(titleLabel)
         addSubview(toggle)
@@ -23,6 +24,7 @@ final class TrialToggleButton: LazyAppearanceButton {
     }
     
     private func setupBackgroundGradientLayer() {
+        backgroundGradientView.isUserInteractionEnabled = false
         backgroundGradientView.gradientStartPoint = CGPoint(x: 0, y: 0.5)
         backgroundGradientView.gradientEndPoint = CGPoint(x: 1, y: 0.5)
     }
