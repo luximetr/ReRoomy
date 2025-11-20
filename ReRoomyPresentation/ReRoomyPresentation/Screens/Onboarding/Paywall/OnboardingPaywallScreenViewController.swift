@@ -54,12 +54,12 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.subtitleLabel.text = localizer.localizeText("subtitle")
         screenView.showPurchaseFooter(title: localizer.localizeText("purchaseFooterTitle"))
         screenView.regularTermPlanButton.titleLabel.text = localizer.localizeText("regularTermPlanTrialDuration")
-        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("regularTermPlanPrice", "0")
+        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("regularTermPlanPrice", formatPrice(0))
         screenView.regularTermPlanButton.priceLabel.text = localizer.localizeText("regularTermPlanTrialPrice")
-        screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("longTermPlanDiscount", "85%")
+        screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("longTermPlanDiscount", formatPercentage(0))
         screenView.longTermPlanButton.titleLabel.text = localizer.localizeText("longTermPlanTitle")
-        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("longTermPlanPrice", "0")
-        screenView.longTermPlanButton.pricePerDayValueLabel.text = "$0.1"
+        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("longTermPlanPrice", formatPrice(0))
+        screenView.longTermPlanButton.pricePerDayValueLabel.text = formatPrice(0)
         screenView.longTermPlanButton.pricePerDayTitleLabel.text = localizer.localizeText("longTermPlanPriceTitle")
         screenView.trialToggleButton.titleLabel.text = localizer.localizeText("trialFooterTitle")
     }
@@ -79,8 +79,33 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     }
     
     private func showUnlimitedPlans(_ plans: UnlimitedPlans) {
+        let longTermPlanPricePerDay = plans.yearly.price / 365
+        let numberOfWeeksInYear = 52
+        let yearlyPriceInRegularTermPlan = plans.weekly.price * Decimal(numberOfWeeksInYear)
+        let longTermPlanDiscount = 1 - plans.yearly.price / yearlyPriceInRegularTermPlan
         screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("longTermPlanPrice", plans.yearly.priceFormatted)
+        screenView.longTermPlanButton.pricePerDayValueLabel.text = formatPrice(longTermPlanPricePerDay)
+        screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("longTermPlanDiscount", formatPercentage(longTermPlanDiscount))
         screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("regularTermPlanPrice", plans.weekly.priceFormatted)
+        screenView.longTermPlanButton.layoutSubviews()
+        screenView.setNeedsLayout()
+        screenView.layoutIfNeeded()
+    }
+    
+    private func formatPrice(_ price: Decimal) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.minimumFractionDigits = 1
+        formatter.locale = locale.foundationLocale
+        let formattedPrice = formatter.string(NSDecimalNumber(decimal: price))
+        return formattedPrice
+    }
+    
+    private func formatPercentage(_ value: Decimal) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        let formattedPrice = formatter.string(NSDecimalNumber(decimal: value))
+        return formattedPrice
     }
     
     // MARK: - Plan option

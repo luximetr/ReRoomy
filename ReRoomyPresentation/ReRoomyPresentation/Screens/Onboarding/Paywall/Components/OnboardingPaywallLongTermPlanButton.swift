@@ -5,7 +5,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     
     // MARK: - Subviews
     
-    private let gradientLayer = CAGradientLayer()
+    private let backgroundGradientView = GradientView()
     private let _titleLabel = UILabel()
     override var titleLabel: UILabel { _titleLabel }
     private let _subtitleLabel = UILabel()
@@ -21,7 +21,8 @@ class LongTermPlanButton: LazyAppearanceButton {
         super.setup()
         layer.cornerRadius = 20
         layer.masksToBounds = true
-        setupGradientLayer()
+        addSubview(backgroundGradientView)
+        setupBackgroundGradientView()
         addSubview(discountBackgroundView)
         setupDiscountBackgroundView()
         addSubview(discountLabel)
@@ -34,9 +35,9 @@ class LongTermPlanButton: LazyAppearanceButton {
         setupPricePerDayTitleLabel()
     }
     
-    private func setupGradientLayer() {
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+    private func setupBackgroundGradientView() {
+        backgroundGradientView.gradientStartPoint = CGPoint(x: 0, y: 0.5)
+        backgroundGradientView.gradientEndPoint = CGPoint(x: 1, y: 0.5)
     }
     
     private func setupDiscountBackgroundView() {
@@ -59,7 +60,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layoutGradientLayer()
+        layoutBackgroundGradientLayer()
         layoutDiscountLabel()
         layoutDiscountBackgroundView()
         layoutTitleLabel()
@@ -68,8 +69,8 @@ class LongTermPlanButton: LazyAppearanceButton {
         layoutPricePerDayTitleLabel()
     }
     
-    private func layoutGradientLayer() {
-        gradientLayer.frame = bounds
+    private func layoutBackgroundGradientLayer() {
+        backgroundGradientView.frame = bounds
     }
     
     private static let discountLabelLeadingTrailing: CGFloat = 16
@@ -179,7 +180,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
         backgroundColor = appearance.colors.secondaryBackground
-        gradientLayer.colors = appearance.colors.secondaryBackgroundGradient
+        backgroundGradientView.gradientColors = appearance.colors.secondaryBackgroundGradient
         discountBackgroundView.backgroundColor = appearance.colors.primaryContrastBackground
         discountLabel.textColor = appearance.colors.primaryContrastText
         discountLabel.font = appearance.fonts.primary(size: 14, weight: .semibold)
@@ -232,7 +233,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     private func showSelected(appearance: any Appearance) {
         layer.borderWidth = 1
         layer.borderColor = appearance.colors.primaryContrastBackground.cgColor
-        layer.insertSublayer(gradientLayer, at: 0)
+        backgroundGradientView.isHidden = false
         titleLabel.textColor = appearance.colors.primaryText
         subtitleLabel.textColor = appearance.colors.primaryText
         pricePerDayValueLabel.textColor = appearance.colors.primaryText
@@ -242,7 +243,7 @@ class LongTermPlanButton: LazyAppearanceButton {
     private func showDeselected(appearance: any Appearance) {
         layer.borderWidth = 0
         layer.borderColor = nil
-        gradientLayer.removeFromSuperlayer()
+        backgroundGradientView.isHidden = true
         titleLabel.textColor = appearance.colors.secondaryText
         subtitleLabel.textColor = appearance.colors.secondaryText
         pricePerDayValueLabel.textColor = appearance.colors.secondaryText

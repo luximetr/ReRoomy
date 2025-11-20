@@ -5,7 +5,7 @@ final class TrialToggleButton: LazyAppearanceButton {
     
     // MARK: - Subviews
     
-    private let gradientLayer = CAGradientLayer()
+    private let backgroundGradientView = GradientView()
     private let _titleLabel = UILabel()
     override var titleLabel: UILabel { _titleLabel }
     private let toggle = UISwitch()
@@ -16,15 +16,15 @@ final class TrialToggleButton: LazyAppearanceButton {
         super.setup()
         layer.cornerRadius = 20
         layer.masksToBounds = true
-        setupGradientLayer()
+        setupBackgroundGradientLayer()
         addSubview(titleLabel)
         addSubview(toggle)
         setupToggle()
     }
     
-    private func setupGradientLayer() {
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+    private func setupBackgroundGradientLayer() {
+        backgroundGradientView.gradientStartPoint = CGPoint(x: 0, y: 0.5)
+        backgroundGradientView.gradientEndPoint = CGPoint(x: 1, y: 0.5)
     }
     
     private func setupToggle() {
@@ -35,13 +35,13 @@ final class TrialToggleButton: LazyAppearanceButton {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        layoutGradientLayer()
+        layoutBackgroundGradientLayer()
         layoutTitleLabel()
         layoutToggle()
     }
     
-    private func layoutGradientLayer() {
-        gradientLayer.frame = bounds
+    private func layoutBackgroundGradientLayer() {
+        backgroundGradientView.frame = bounds
     }
 
     private static let titleLabelLeading: CGFloat = 16
@@ -87,7 +87,7 @@ final class TrialToggleButton: LazyAppearanceButton {
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
         backgroundColor = appearance.colors.secondaryBackground
-        gradientLayer.colors = appearance.colors.secondaryBackgroundGradient
+        backgroundGradientView.gradientColors = appearance.colors.secondaryBackgroundGradient
         titleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         titleLabel.textColor = appearance.colors.primaryText
         toggle.tintColor = appearance.colors.successActionDisabledBackground
@@ -141,13 +141,13 @@ final class TrialToggleButton: LazyAppearanceButton {
     }
     
     private func showSelected(appearance: any Appearance, animated: Bool) {
-        layer.insertSublayer(gradientLayer, at: 0)
+        backgroundGradientView.isHidden = false
         titleLabel.textColor = appearance.colors.primaryText
         toggle.setOn(true, animated: animated)
     }
     
     private func showDeselected(appearance: any Appearance, animated: Bool) {
-        gradientLayer.removeFromSuperlayer()
+        backgroundGradientView.isHidden = true
         titleLabel.textColor = appearance.colors.secondaryText
         toggle.setOn(false, animated: animated)
     }

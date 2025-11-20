@@ -218,12 +218,16 @@ final class ScreenView: StatusBarScreenView {
         footerView.imageView.image = appearance.images.tickShield
         footerView.imageView.tintColor = appearance.colors.successText
         footerView.titleLabel.text = title
+        setNeedsLayout()
+        layoutIfNeeded()
     }
     
     func showTrialFooter(title: String) {
         footerView.imageView.image = appearance.images.tickCircle
         footerView.imageView.tintColor = appearance.colors.primaryText
         footerView.titleLabel.text = title
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 }
 }

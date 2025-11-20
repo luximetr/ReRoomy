@@ -18,8 +18,10 @@ class GradientView: AUIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         gradientLayer.frame = bounds
-        gradientLayer.type = .radial
+        CATransaction.commit()
     }
     
     // MARK: - Gradient

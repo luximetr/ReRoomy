@@ -5,7 +5,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
     
     // MARK: - Subviews
     
-    private let gradientLayer = CAGradientLayer()
+    private let backgroundGradientView = GradientView()
     private let _titleLabel = UILabel()
     override var titleLabel: UILabel { _titleLabel }
     private let _subtitleLabel = UILabel()
@@ -18,16 +18,17 @@ class RegularTermPlanButton: LazyAppearanceButton {
         super.setup()
         layer.cornerRadius = 20
         layer.masksToBounds = true
-        setupGradientLayer()
+        addSubview(backgroundGradientView)
+        setupBackgroundGradientLayer()
         addSubview(titleLabel)
         addSubview(subtitleLabel)
         addSubview(priceLabel)
         setupPriceLabel()
     }
     
-    private func setupGradientLayer() {
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+    private func setupBackgroundGradientLayer() {
+        backgroundGradientView.gradientStartPoint = CGPoint(x: 0, y: 0.5)
+        backgroundGradientView.gradientEndPoint = CGPoint(x: 1, y: 0.5)
     }
     
     private func setupPriceLabel() {
@@ -38,14 +39,14 @@ class RegularTermPlanButton: LazyAppearanceButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layoutGradientLayer()
+        layoutBackgroundGradientLayer()
         layoutTitleLabel()
         layoutSubtitleLabel()
         layoutPriceLabel()
     }
     
-    private func layoutGradientLayer() {
-        gradientLayer.frame = bounds
+    private func layoutBackgroundGradientLayer() {
+        backgroundGradientView.frame = bounds
     }
     
     private static let titleLabelTop: CGFloat = 12
@@ -115,7 +116,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
         backgroundColor = appearance.colors.secondaryBackground
-        gradientLayer.colors = appearance.colors.secondaryBackgroundGradient
+        backgroundGradientView.gradientColors = appearance.colors.secondaryBackgroundGradient
         titleLabel.font = appearance.fonts.primary(size: 24, weight: .semibold)
         subtitleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         priceLabel.font = appearance.fonts.primary(size: 20, weight: .semibold)
@@ -164,7 +165,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
     private func showSelected(appearance: any Appearance) {
         layer.borderWidth = 1
         layer.borderColor = appearance.colors.primaryContrastBackground.cgColor
-        layer.insertSublayer(gradientLayer, at: 0)
+        backgroundGradientView.isHidden = false
         titleLabel.textColor = appearance.colors.primaryText
         subtitleLabel.textColor = appearance.colors.primaryText
         priceLabel.textColor = appearance.colors.primaryText
@@ -173,7 +174,7 @@ class RegularTermPlanButton: LazyAppearanceButton {
     private func showDeselected(appearance: any Appearance) {
         layer.borderWidth = 0
         layer.borderColor = nil
-        gradientLayer.removeFromSuperlayer()
+        backgroundGradientView.isHidden = true
         titleLabel.textColor = appearance.colors.secondaryText
         subtitleLabel.textColor = appearance.colors.secondaryText
         priceLabel.textColor = appearance.colors.secondaryText
