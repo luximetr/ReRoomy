@@ -85,9 +85,11 @@ class Application: NSObject, UIApplicationDelegate, UIWindowSceneDelegate {
         if #available(iOS 15.0, *) {
             let storeKitProvider = StoreKit2Provider()
             _storeKitProvider = storeKitProvider
+            return storeKitProvider
         } else {
-            
+            let storeKitProvider = StoreKitProvider()
+            _storeKitProvider = storeKitProvider
+            return storeKitProvider
         }
-        return storeKitProvider
     }
 }
