@@ -19,19 +19,9 @@ class RegularTermPlanButton: LazyAppearanceButton {
         layer.cornerRadius = 20
         layer.masksToBounds = true
         addSubview(titleLabel)
-        setupTitleLabel()
         addSubview(subtitleLabel)
-        setupSubtitleLabel()
         addSubview(priceLabel)
         setupPriceLabel()
-    }
-    
-    private func setupTitleLabel() {
-        
-    }
-    
-    private func setupSubtitleLabel() {
-        
     }
     
     private func setupPriceLabel() {
@@ -53,7 +43,6 @@ class RegularTermPlanButton: LazyAppearanceButton {
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
     }
-    
     
     private static let titleLabelTop: CGFloat = 12
     private static let titleLabelLeadingTrailing: CGFloat = 16

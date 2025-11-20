@@ -34,8 +34,15 @@ final class TrialToggleButton: LazyAppearanceButton {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        layoutGradientLayer()
         layoutTitleLabel()
         layoutToggle()
+    }
+    
+    private func layoutGradientLayer() {
+        gradientLayer.frame = bounds
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
     }
 
     private static let titleLabelLeading: CGFloat = 16
@@ -81,6 +88,7 @@ final class TrialToggleButton: LazyAppearanceButton {
     override func setAppearance(_ appearance: any Appearance) {
         super.setAppearance(appearance)
         backgroundColor = appearance.colors.secondaryBackground
+        gradientLayer.colors = appearance.colors.secondaryBackgroundGradient
         titleLabel.font = appearance.fonts.primary(size: 18, weight: .medium)
         titleLabel.textColor = appearance.colors.primaryText
         toggle.tintColor = appearance.colors.successActionDisabledBackground
@@ -98,11 +106,17 @@ final class TrialToggleButton: LazyAppearanceButton {
     }
     
     private func showIsHighlighted(_ isHighlightedUpdated: Bool) {
-        if isHighlightedUpdated {
-            titleLabel.alpha = 0.6
-        } else {
-            titleLabel.alpha = 1
-        }
+        let targetAlpha: CGFloat = isHighlightedUpdated ? 0.6 : 1.0
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: [.allowUserInteraction, .curveEaseInOut],
+            animations: { [weak self] in
+                guard let self = self else { return }
+                self.titleLabel.alpha = targetAlpha
+            },
+            completion: nil
+        )
     }
     
     // MARK: - Selected
