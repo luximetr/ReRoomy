@@ -96,7 +96,6 @@ class LongTermPlanButton: LazyAppearanceButton {
         discountBackgroundView.frame = frame
     }
     
-    
     private static let titleLabelTop: CGFloat = 12
     private static let titleLabelLeadingTrailing: CGFloat = 16
     private static let titleLabelMinHeight: CGFloat = 26
@@ -131,8 +130,9 @@ class LongTermPlanButton: LazyAppearanceButton {
     
     private func layoutPricePerDayValueLabel() {
         let y = discountBackgroundView.frame.maxY + Self.pricePerDayValueLabelTop
-        let height = Self.pricePerDayValueLabelHeight
-        let width = pricePerDayValueLabel.sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: height)).width
+        let sizeThatFits = pricePerDayValueLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+        let height = max(sizeThatFits.height, Self.pricePerDayValueLabelHeight)
+        let width = sizeThatFits.width
         let x = bounds.width - width - Self.pricePerDayValueLabelTrailing
         let frame = CGRect(x: x, y: y, width: width, height: height)
         pricePerDayValueLabel.frame = frame
@@ -143,8 +143,9 @@ class LongTermPlanButton: LazyAppearanceButton {
     
     private func layoutPricePerDayTitleLabel() {
         let y = pricePerDayValueLabel.frame.maxY + Self.pricePerDayTitleLabelTop
-        let height = Self.pricePerDayTitleLabelHeight
-        let width = pricePerDayTitleLabel.sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: height)).width
+        let sizeThatFits = pricePerDayTitleLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+        let height = max(sizeThatFits.height, Self.pricePerDayTitleLabelHeight)
+        let width = sizeThatFits.width
         let x = bounds.width - width - Self.pricePerDayValueLabelTrailing
         let frame = CGRect(x: x, y: y, width: width, height: height)
         pricePerDayTitleLabel.frame = frame
