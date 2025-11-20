@@ -107,7 +107,7 @@ final class TrialToggleButton: LazyAppearanceButton {
     }
     
     private func showIsHighlighted(_ isHighlightedUpdated: Bool) {
-        let targetAlpha: CGFloat = isHighlightedUpdated ? 0.6 : 1.0
+        let targetAlpha: CGFloat = isHighlightedUpdated ? 0.8 : 1.0
         UIView.animate(
             withDuration: 0.3,
             delay: 0,
