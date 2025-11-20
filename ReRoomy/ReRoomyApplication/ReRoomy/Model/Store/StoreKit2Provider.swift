@@ -3,7 +3,13 @@ import Foundation
 import UIKit
 
 @available(iOS 15, *)
-class StoreKit2Provider: NSObject, StoreKitProviderProtocol {
+class StoreKit2Provider: StoreKitProviderProtocol {
+    
+    // MARK: - Init
+    
+    init() {
+        updatesListener = createUpdatesListener()
+    }
     
     // MARK: - Plans
     
@@ -20,16 +26,13 @@ class StoreKit2Provider: NSObject, StoreKitProviderProtocol {
     private var yearlyPlanProductId: String { "com.sync.luximetr.reroomy.subscription.unlimited.yearly_v1" }
     
     private var products: [SKProduct] = []
-    private var productsRequest: SKProductsRequest?
     
-    @available(iOS 15, *)
     private func parsePlans(products: [Product]) throws -> UnlimitedPlans {
         let yearlyPlan = try parseUnlimitedPlan(products: products, productId: yearlyPlanProductId)
         let weeklyPlan = try parseUnlimitedPlan(products: products, productId: weeklyPlanProductId)
         return .init(yearly: yearlyPlan, weekly: weeklyPlan)
     }
     
-    @available(iOS 15, *)
     private func parseUnlimitedPlan(products: [Product], productId: String) throws -> UnlimitedPlan {
         guard let product = products.first(where: { $0.id == productId }) else {
             throw Error.productNotFound
@@ -94,13 +97,40 @@ class StoreKit2Provider: NSObject, StoreKitProviderProtocol {
     // MARK: - Purchased
     
     private var purchasedProductIds: Set<String> = []
+    private var updatesListener: Task<Void, Never>?
     
-    @available(iOS 15, *)
+    func createUpdatesListener() -> Task<Void, Never> {
+        Task(priority: .background) {
+            for await verificationResult in Transaction.updates {
+                handle(updatedTransaction: verificationResult)
+            }
+        }
+    }
+    
+    private func handle(updatedTransaction verificationResult: VerificationResult<Transaction>) {
+        guard case .verified(let transaction) = verificationResult else {
+            return
+        }
+        if let expirationDate = transaction.expirationDate, expirationDate < Date() {
+            return
+        }
+        if transaction.revocationDate != nil {
+            removePurchasedProduct(transaction: transaction)
+        } else {
+            insertPurchasedProduct(transaction: transaction)
+        }
+    }
+    
     private func insertPurchasedProduct(transaction: Transaction) {
     }
     
-    @available(iOS 15, *)
     private func removePurchasedProduct(transaction: Transaction) {
+    }
+    
+    // MARK: - Restore purchase
+    
+    func restorePurchases() async throws {
+        try await AppStore.sync()
     }
     
     // MARK: - Error
