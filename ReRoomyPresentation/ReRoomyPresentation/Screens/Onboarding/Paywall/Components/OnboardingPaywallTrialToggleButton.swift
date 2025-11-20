@@ -16,14 +16,15 @@ final class TrialToggleButton: LazyAppearanceButton {
         super.setup()
         layer.cornerRadius = 20
         layer.masksToBounds = true
+        setupGradientLayer()
         addSubview(titleLabel)
-        setupTitleLabel()
         addSubview(toggle)
         setupToggle()
     }
-
-    private func setupTitleLabel() {
-        
+    
+    private func setupGradientLayer() {
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
     }
     
     private func setupToggle() {
@@ -41,8 +42,6 @@ final class TrialToggleButton: LazyAppearanceButton {
     
     private func layoutGradientLayer() {
         gradientLayer.frame = bounds
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
     }
 
     private static let titleLabelLeading: CGFloat = 16

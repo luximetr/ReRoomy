@@ -30,12 +30,12 @@ final class ScreenView: StatusBarScreenView {
         setupBackgroundImageView()
         addSubview(backgroundPatternImageView)
         setupBackgroundPatternImageView()
+        addSubview(bannerImageView)
+        setupBannerImageView()
         addSubview(titleLabel)
         setupTitleLabel()
         addSubview(subtitleLabel)
         setupSubtitleLabel()
-        addSubview(bannerImageView)
-        setupBannerImageView()
         addSubview(longTermPlanButton)
         addSubview(regularTermPlanButton)
         addSubview(trialToggleButton)
@@ -77,12 +77,12 @@ final class ScreenView: StatusBarScreenView {
         layoutBackgroundPatternImageView()
         layoutTitleLabel()
         layoutSubtitleLabel()
-        layoutBannerImageView()
         layoutFooterView()
         layoutContinueButton()
         layoutTrialToggleButton()
         layoutRegularTermPlanButton()
         layoutLongTermPlanButton()
+        layoutBannerImageView()
     }
     
     private static let contentLeadingTrailing: CGFloat = 16
@@ -122,7 +122,7 @@ final class ScreenView: StatusBarScreenView {
     }
     
     private static let footerViewMinLeadingTrailing: CGFloat = 16
-    private static let footerViewBottom: CGFloat = -3
+    private static let footerViewBottom: CGFloat = 0
     
     private func layoutFooterView() {
         let widthToFit = bounds.width - Self.footerViewMinLeadingTrailing * 2
@@ -183,10 +183,11 @@ final class ScreenView: StatusBarScreenView {
     
     private func layoutBannerImageView() {
         let x: CGFloat = 0
-        let y = subtitleLabel.frame.maxY + 20
         let width = bounds.width
         let aspectRation: CGFloat = 0.7511210762
         let height = width * aspectRation
+        let proposedY = longTermPlanButton.frame.minY - height + 20
+        let y = max(proposedY, subtitleLabel.frame.maxY)
         let frame = CGRect(x: x, y: y, width: width, height: height)
         bannerImageView.frame = frame
     }
