@@ -68,4 +68,5 @@ public final class Presentation: @MainActor PresentationProtocol {
     // MARK: - Unlimited plans
     
     public var getUnlimitedPlans: (() async throws -> UnlimitedPlans)!
+    public var purchaseUnlimitedPlan: ((UnlimitedPlan) async throws -> UnlimitedPlanPurchaseResult)!
 }

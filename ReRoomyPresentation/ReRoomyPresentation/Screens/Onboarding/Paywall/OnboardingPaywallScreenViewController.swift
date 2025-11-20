@@ -24,6 +24,7 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         screenView.regularTermPlanButton.addTarget(self, action: #selector(regularTermPlanButtonTouchUpInside), for: .touchUpInside)
         screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonTouchUpInside), for: .touchUpInside)
         screenView.trialToggleButton.addTarget(self, action: #selector(trialToggleButtonValueChanged), for: .valueChanged)
+        screenView.continueButton.addTarget(self, action: #selector(continueButtonTouchUpInside), for: .touchUpInside)
         setLocalizedContent()
         showSelectedPlanSelection(.longTerm, animated: false)
         loadUnlimitedPlans()
@@ -65,12 +66,14 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
     
     // MARK: - Plans
     
+    private var unlimitedPlans: UnlimitedPlans?
     var getUnlimitedPlans: ((@escaping (UnlimitedPlans) -> Void) -> Void)?
     
     private func loadUnlimitedPlans() {
         guard let getUnlimitedPlans = getUnlimitedPlans else { return }
         getUnlimitedPlans({ [weak self] plans in
             guard let self = self else { return }
+            self.unlimitedPlans = plans
             self.showUnlimitedPlans(plans)
         })
     }
@@ -154,5 +157,30 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
             updatedSelectedPlanSelection = .longTerm
         }
         setSelectedPlanSelection(updatedSelectedPlanSelection, animated: animated)
+    }
+    
+    // MARK: - Continue
+    
+    @objc private func continueButtonTouchUpInside() {
+        switch selectedPlanSelection {
+        case .longTerm:
+            longTermPlanContinueButtonTouchUpInside()
+        case .regularTerm:
+            regularTermPlanContinueButtonTouchUpInside()
+        }
+    }
+    
+    var onPurchaseUnlimitedPlan: ((UnlimitedPlan) -> Void)?
+    
+    private func longTermPlanContinueButtonTouchUpInside() {
+        guard let onPurchaseUnlimitedPlan = onPurchaseUnlimitedPlan else { return }
+        guard let yearlyPlan = unlimitedPlans?.yearly else { return }
+        onPurchaseUnlimitedPlan(yearlyPlan)
+    }
+    
+    private func regularTermPlanContinueButtonTouchUpInside() {
+        guard let onPurchaseUnlimitedPlan = onPurchaseUnlimitedPlan else { return }
+        guard let weeklyPlan = unlimitedPlans?.weekly else { return }
+        onPurchaseUnlimitedPlan(weeklyPlan)
     }
 }

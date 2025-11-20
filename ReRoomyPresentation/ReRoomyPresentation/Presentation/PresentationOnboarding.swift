@@ -21,6 +21,26 @@ extension Presentation {
                 }
             }
         }
+        viewController.onPurchaseUnlimitedPlan = { [weak self] plan in
+            guard let self = self else { return }
+            Task(priority: .userInitiated) {
+                do {
+                    let result = try await purchaseUnlimitedPlan(plan)
+                    switch result {
+                    case .pending:
+                        print("Pending")
+                    case .purchased:
+                        print("Purchased")
+                    case .userCancelled:
+                        print("User cancelled")
+                    case .unknown:
+                        print("Uknown")
+                    }
+                } catch {
+                    print("Handle error \(error.localizedDescription)")
+                }
+            }
+        }
         return viewController
     }
 }

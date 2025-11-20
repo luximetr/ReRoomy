@@ -33,6 +33,7 @@ class Application: NSObject, UIApplicationDelegate {
         var presentation: PresentationProtocol = Presentation(locale: presentationLocale, time: time, appearanceSetting: presentationAppearanceSetting)
         weak var weakSelf = self
         presentation.getUnlimitedPlans = weakSelf?.presentationUnlimitedPlans
+        presentation.purchaseUnlimitedPlan = weakSelf?.presentationPurchaseUnlimitedPlan
         self.presentation = presentation
     }
     
