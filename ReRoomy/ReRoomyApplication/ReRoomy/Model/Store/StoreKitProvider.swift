@@ -23,8 +23,7 @@ class StoreKitProvider: NSObject {
             weekly: .init(id: weeklyPlanProductId, price: 7.99, priceFormatted: "$7.99", currencyCode: "USD")
         )
         if #available(iOS 15.0, *) {
-            let products = try await Product.products(for: productIds)
-            print(products)
+            _ = try await Product.products(for: productIds)
         } else {
             // before iOS 15 implementation
         }

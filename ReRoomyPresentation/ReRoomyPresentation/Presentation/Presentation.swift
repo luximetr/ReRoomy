@@ -4,13 +4,11 @@ import UIKit
 public final class Presentation: @MainActor PresentationProtocol {
     
     // MARK: - Init
-    
-    public init(locale: Locale, time: Time, appearanceSetting: AppearanceSetting) {
+
+    public init(window: UIWindow, locale: Locale, time: Time, appearanceSetting: AppearanceSetting) {
+        self.window = window
         self.locale = locale
         self.time = time
-        let window = UIWindow()
-        window.windowLevel = .normal
-        self.window = window
         self.appearance = Presentation.initializeAppearance(appearanceSetting, window: window)
         self.appearanceSetting = appearanceSetting
     }

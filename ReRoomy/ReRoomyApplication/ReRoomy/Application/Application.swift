@@ -1,36 +1,45 @@
 import UIKit
 import ReRoomyPresentation
 
-class Application: NSObject, UIApplicationDelegate {
+class Application: NSObject, UIApplicationDelegate, UIWindowSceneDelegate {
     
     // MARK: - Life cycle
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let configuration = UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        configuration.delegateClass = Application.self
+        return configuration
+    }
+    
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = scene as? UIWindowScene else { return }
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
         do {
-            try initialize()
+            try initialize(window: window)
             presentation.showOnboarding()
         } catch {
-            print(error)
+            print("Failed to initialize app: \(error)")
         }
-        return true
     }
     
     // MARK: - Initialize
     
-    func initialize() throws {
+    func initialize(window: UIWindow) throws {
         try initializeLocale()
         initializeTime()
-        try initializePresentation()
+        try initializePresentation(window: window)
     }
     
     // MARK: - Presentation
     
+    var window: UIWindow?
     var presentation: PresentationProtocol!
     
-    func initializePresentation() throws {
+    func initializePresentation(window: UIWindow) throws {
         let presentationAppearanceSetting: PresentationAppearanceSetting = .dark
         let presentationLocale = LocaleMapper.mapToPresentation(locale: locale)
-        var presentation: PresentationProtocol = Presentation(locale: presentationLocale, time: time, appearanceSetting: presentationAppearanceSetting)
+        var presentation: PresentationProtocol = Presentation(window: window, locale: presentationLocale, time: time, appearanceSetting: presentationAppearanceSetting)
         weak var weakSelf = self
         presentation.getUnlimitedPlans = weakSelf?.presentationUnlimitedPlans
         presentation.purchaseUnlimitedPlan = weakSelf?.presentationPurchaseUnlimitedPlan
