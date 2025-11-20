@@ -77,13 +77,17 @@ class Application: NSObject, UIApplicationDelegate, UIWindowSceneDelegate {
     
     // MARK: - Store
     
-    private var _storeKitProvider: StoreKitProvider?
-    var storeKitProvider: StoreKitProvider {
+    private var _storeKitProvider: StoreKitProviderProtocol?
+    var storeKitProvider: StoreKitProviderProtocol {
         if let storeKitProvider = _storeKitProvider {
             return storeKitProvider
         }
-        let storeKitProvider = StoreKitProvider()
-        _storeKitProvider = storeKitProvider
+        if #available(iOS 15.0, *) {
+            let storeKitProvider = StoreKit2Provider()
+            _storeKitProvider = storeKitProvider
+        } else {
+            
+        }
         return storeKitProvider
     }
 }

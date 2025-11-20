@@ -45,7 +45,7 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "0.99",
+          "displayPrice" : "49.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "9F4C449E",
@@ -58,7 +58,7 @@
             }
           ],
           "productID" : "com.sync.luximetr.reroomy.subscription.unlimited.yearly_v1",
-          "recurringSubscriptionPeriod" : "P1M",
+          "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : "Unlimited Yearly Plan",
           "subscriptionGroupID" : "1C0C8DD4",
           "type" : "RecurringSubscription",
@@ -73,7 +73,7 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "0.99",
+          "displayPrice" : "7.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "36B9952B",
@@ -86,7 +86,7 @@
             }
           ],
           "productID" : "com.sync.luximetr.reroomy.subscription.unlimited.weekly_v1",
-          "recurringSubscriptionPeriod" : "P1M",
+          "recurringSubscriptionPeriod" : "P1W",
           "referenceName" : "Unlimited Weekly Plan",
           "subscriptionGroupID" : "1C0C8DD4",
           "type" : "RecurringSubscription",
