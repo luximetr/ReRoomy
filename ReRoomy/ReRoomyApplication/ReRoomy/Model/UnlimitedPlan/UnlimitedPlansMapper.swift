@@ -21,7 +21,6 @@ class UnlimitedPlansMapper {
         return .init(
             id: plan.id,
             price: plan.price,
-            priceFormatted: plan.priceFormatted,
             currencyCode: plan.currencyCode
         )
     }
@@ -32,7 +31,6 @@ class UnlimitedPlansMapper {
         return .init(
             id: plan.id,
             price: plan.price,
-            priceFormatted: plan.priceFormatted,
             currencyCode: plan.currencyCode
         )
     }

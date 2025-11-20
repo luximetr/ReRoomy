@@ -46,7 +46,7 @@ class StoreKit2Provider: StoreKitProviderProtocol {
         guard let offers = productAttributes["offers"] as? [[String: Any]], let offer = offers.first else {
             throw Error.failedToParseProductOffer
         }
-        let (priceRaw, price) = try parsePrice(from: offer)
+        let price = try parsePrice(from: offer)
         guard let currencyCode = offer["currencyCode"] as? String else {
             throw Error.failedToParseProductCurrencyCode
         }
@@ -54,18 +54,17 @@ class StoreKit2Provider: StoreKitProviderProtocol {
         return .init(
             id: productId,
             price: price,
-            priceFormatted: priceRaw,
             currencyCode: currencyCode
         )
     }
     
-    private func parsePrice(from offer: [String: Any]) throws -> (String, Decimal) {
+    private func parsePrice(from offer: [String: Any]) throws -> Decimal {
         let priceValue = offer["priceString"] ?? offer["price"]
         if let priceString = priceValue as? String, let price = Decimal(string: priceString) {
-            return (priceString, price)
+            return price
         }
         if let priceDouble = priceValue as? Double {
-            return (String(priceDouble), Decimal(priceDouble))
+            return Decimal(priceDouble)
         }
         throw Error.failedToParseProductPrice
     }

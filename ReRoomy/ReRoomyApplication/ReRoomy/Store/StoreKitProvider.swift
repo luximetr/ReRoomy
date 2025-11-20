@@ -51,16 +51,11 @@ class StoreKitProvider: NSObject, StoreKitProviderProtocol, SKPaymentTransaction
             throw Error.productNotFound
         }
         
-        let priceFormatter = NumberFormatter()
-        priceFormatter.numberStyle = .currency
-        priceFormatter.locale = product.priceLocale
-        let priceFormatted = priceFormatter.string(from: product.price) ?? "\(product.price)"
         let currencyCode = product.priceLocale.currencyCode ?? "USD"
         
         return .init(
             id: productId,
             price: product.price as Decimal,
-            priceFormatted: priceFormatted,
             currencyCode: currencyCode
         )
     }

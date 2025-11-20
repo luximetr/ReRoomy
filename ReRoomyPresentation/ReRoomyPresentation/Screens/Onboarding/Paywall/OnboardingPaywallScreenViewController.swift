@@ -83,10 +83,10 @@ class OnboardingPaywallScreenViewController: StatusBarScreenViewController {
         let numberOfWeeksInYear = 52
         let yearlyPriceInRegularTermPlan = plans.weekly.price * Decimal(numberOfWeeksInYear)
         let longTermPlanDiscount = 1 - plans.yearly.price / yearlyPriceInRegularTermPlan
-        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("longTermPlanPrice", plans.yearly.priceFormatted)
+        screenView.longTermPlanButton.subtitleLabel.text = localizer.localizeText("longTermPlanPrice", formatPrice(plans.yearly.price))
         screenView.longTermPlanButton.pricePerDayValueLabel.text = formatPrice(longTermPlanPricePerDay)
         screenView.longTermPlanButton.discountLabel.text = localizer.localizeText("longTermPlanDiscount", formatPercentage(longTermPlanDiscount))
-        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("regularTermPlanPrice", plans.weekly.priceFormatted)
+        screenView.regularTermPlanButton.subtitleLabel.text = localizer.localizeText("regularTermPlanPrice", formatPrice(plans.weekly.price))
         screenView.longTermPlanButton.layoutSubviews()
         screenView.setNeedsLayout()
         screenView.layoutIfNeeded()
