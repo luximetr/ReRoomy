@@ -128,11 +128,16 @@ class RegularTermPlanButton: LazyAppearanceButton {
     
     private func showIsHighlighted(_ isHighlightedUpdated: Bool) {
         let highligtingViews = [titleLabel, subtitleLabel, priceLabel]
-        if isHighlightedUpdated {
-            highligtingViews.forEach({ $0.alpha = 0.6 })
-        } else {
-            highligtingViews.forEach({ $0.alpha = 1 })
-        }
+        let targetAlpha: CGFloat = isHighlightedUpdated ? 0.6 : 1.0
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: [.allowUserInteraction, .curveEaseInOut],
+            animations: {
+                highligtingViews.forEach({ $0.alpha = targetAlpha })
+            },
+            completion: nil
+        )
     }
     
     // MARK: - Selected

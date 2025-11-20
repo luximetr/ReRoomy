@@ -27,10 +27,16 @@ class TextFilledButton: LazyAppearanceButton {
     }
     
     private func showIsHighlighted(_ isHighlightedUpdated: Bool) {
-        if isHighlightedUpdated {
-            titleLabel?.alpha = 0.6
-        } else {
-            titleLabel?.alpha = 1
-        }
+        guard let titleLabel = titleLabel else { return }
+        let targetAlpha: CGFloat = isHighlightedUpdated ? 0.6 : 1.0
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: [.allowUserInteraction, .curveEaseInOut],
+            animations: {
+                titleLabel.alpha = targetAlpha
+            },
+            completion: nil
+        )
     }
 }
